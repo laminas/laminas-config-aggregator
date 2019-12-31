@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 Initial release.
 
-Based on the 0.4.0 version of [mtymek/expressive-config-manager](https://github.com/mtymek/expressive-config-manager),
-this version renames the namespace from `Zend\Expressive\ConfigManager` to
-`Zend\ConfigAggregator`, and renames the `ConfigManager` class to
+Based on the 0.4.0 version of [mtymek/mezzio-config-manager](https://github.com/mtymek/mezzio-config-manager),
+this version renames the namespace from `Mezzio\ConfigManager` to
+`Laminas\ConfigAggregator`, and renames the `ConfigManager` class to
 `ConfigAggregator`. All other functionality remains the same.
