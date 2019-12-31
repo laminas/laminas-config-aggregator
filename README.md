@@ -1,10 +1,10 @@
-# zend-config-aggregator
+# laminas-config-aggregator
 
-[![Build Status](https://travis-ci.org/zendframework/zend-config-aggregator.svg?branch=master)](https://travis-ci.org/zendframework/zend-config-aggregator)
+[![Build Status](https://travis-ci.org/laminas/laminas-config-aggregator.svg?branch=master)](https://travis-ci.org/laminas/laminas-config-aggregator)
 
 Lightweight library for collecting and merging configuration from different sources. 
 
-While designed for [Expressive](https://github.com/zendframework/zend-expressive) 
+While designed for [Mezzio](https://github.com/mezzio/mezzio) 
 applications, it can work with any PHP project for aggregating and returning
 merged configuration, from either a variety of configuration formats or
 "configuration providers", invokable classes returning an array of configuration
@@ -18,8 +18,8 @@ At the basic level, `ConfigAggregator` can be used to merge PHP-based
 configuration files: 
 
 ```php
-use Zend\ConfigAggregator\ConfigAggregator;
-use Zend\ConfigAggregator\PhpFileProvider;
+use Laminas\ConfigAggregator\ConfigAggregator;
+use Laminas\ConfigAggregator\PhpFileProvider;
 
 $aggregator = new ConfigAggregator([
     new PhpFileProvider('*.global.php'),
@@ -83,7 +83,7 @@ var_dump($aggregator->getMergedConfig());
 ```
 
 If the provider is a class name, the aggregator automatically instantiates it.
-This can be used to mimic the Zend Framework module system: you can specify a
+This can be used to mimic the Laminas module system: you can specify a
 list of config providers from different packages, and aggregated configuration
 will be available to your application.
 
@@ -132,7 +132,7 @@ array(4) {
 ### Caching
 
 Merging configuration on every request is not performant. As such,
-zend-config-aggregator also provides the ability to enable a filesystem-based
+laminas-config-aggregator also provides the ability to enable a filesystem-based
 configuration cache.
 
 To enable the configuration cache, pass a cache file name as the second
@@ -159,7 +159,7 @@ configuration caching in production:
 
 ```php
 <?php
-use Zend\ConfigAggregator\ConfigAggregator;
+use Laminas\ConfigAggregator\ConfigAggregator;
 
 return [
     ConfigAggregator::ENABLE_CACHE => true,
@@ -178,8 +178,8 @@ Config providers can be written as generators. This way single callable can prov
 multiple configurations:
 
 ```php
-use Zend\ConfigAggregator\ConfigAggregator;
-use Zend\Stdlib\Glob;
+use Laminas\ConfigAggregator\ConfigAggregator;
+use Laminas\Stdlib\Glob;
 
 $aggregator = new ConfigAggregator([
     function () { 
@@ -212,8 +212,8 @@ return [
 Wildcards are supported:
 
 ```php
-use Zend\ConfigAggregator\ConfigAggregator;
-use Zend\ConfigAggregator\PhpFileProvider;
+use Laminas\ConfigAggregator\ConfigAggregator;
+use Laminas\ConfigAggregator\PhpFileProvider;
 
 $aggregator = new ConfigAggregator(
     [
@@ -226,25 +226,25 @@ The example above will merge all matching files from the `config/` directory. If
 you have files such as `app.global.php` or `database.global.php` in that
 directory, they will be loaded using this above lines of code.
 
-Globbing defaults to PHP's `glob()` function. However, if `Zend\Stdlib\Glob` is
+Globbing defaults to PHP's `glob()` function. However, if `Laminas\Stdlib\Glob` is
 available, it will use that to allow for cross-platform glob patterns, including
 brace notation: `'config/autoload/{{,*.}global,{,*.}local}.php'`. Install
-zendframework/zend-stdlib to utilize this feature.
+laminas/laminas-stdlib to utilize this feature.
     
-### ZendConfigProvider
+### LaminasConfigProvider
 
 Sometimes using plain PHP files may be not enough; you may want to build your configuration 
 from multiple files of different formats, such as INI, YAML, or XML.
-zend-config-aggregator allows you to do so via its `ZendConfigProvider`:
+laminas-config-aggregator allows you to do so via its `LaminasConfigProvider`:
 
 ```php
-use Zend\ConfigAggregator\ConfigAggregator;
-use Zend\ConfigAggregator\ZendConfigProvider;
+use Laminas\ConfigAggregator\ConfigAggregator;
+use Laminas\ConfigAggregator\LaminasConfigProvider;
 
 $aggregator = new ConfigAggregator(
     [
-        new ZendConfigProvider('*.global.json'),
-        new ZendConfigProvider('database.local.ini'),
+        new LaminasConfigProvider('*.global.json'),
+        new LaminasConfigProvider('database.local.ini'),
     ]
 );
 ```
@@ -254,16 +254,16 @@ These could even be combined into a single glob statement:
 ```php
 $aggregator = new ConfigAggregator(
     [
-        new ZendConfigProvider('*.global.json,database.local.ini'),
+        new LaminasConfigProvider('*.global.json,database.local.ini'),
     ]
 );
 ```
 
-`ZendConfigProvider` accepts wildcards and autodetects the config type based on
+`LaminasConfigProvider` accepts wildcards and autodetects the config type based on
 file extension. 
 
-ZendConfigProvider requires two packages to be installed:
-`zendframework/zend-config` and `zendframework/zend-servicemanager`. Some config
+LaminasConfigProvider requires two packages to be installed:
+`laminas/laminas-config` and `laminas/laminas-servicemanager`. Some config
 readers (JSON, YAML) may need additional dependencies; please refer to
-[the zend-config manual](https://docs.zendframework.com/zend-config/reader/)
+[the laminas-config manual](https://docs.laminas.dev/laminas-config/reader/)
 for more details.

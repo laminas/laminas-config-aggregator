@@ -1,20 +1,20 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-config-aggregator for the canonical source repository
- * @copyright Copyright (c) 2016 Zend Technologies USA Inc. (http://www.zend.com)
- * @copyright Copyright (c) 2015-2016 Mateusz Tymek (http://mateusztymek.pl)
- * @license   https://github.com/zendframework/zend-config-aggregator/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-config-aggregator for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-config-aggregator/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-config-aggregator/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\ConfigAggregator;
+namespace Laminas\ConfigAggregator;
 
-use Zend\Config\Factory as ConfigFactory;
+use Laminas\Config\Factory as ConfigFactory;
 
 /**
- * Glob a set of any configuration files supported by Zend\Config\Factory as
+ * Glob a set of any configuration files supported by Laminas\Config\Factory as
  * configuration providers.
  */
-class ZendConfigProvider
+class LaminasConfigProvider
 {
     use GlobTrait;
 

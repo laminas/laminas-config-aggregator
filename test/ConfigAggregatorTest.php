@@ -1,20 +1,20 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-config-aggregator for the canonical source repository
- * @copyright Copyright (c) 2016 Zend Technologies USA Inc. (http://www.zend.com)
- * @copyright Copyright (c) 2015-2016 Mateusz Tymek (http://mateusztymek.pl)
- * @license   https://github.com/zendframework/zend-config-aggregator/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-config-aggregator for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-config-aggregator/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-config-aggregator/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\ConfigAggregator;
+namespace LaminasTest\ConfigAggregator;
 
+use Laminas\ConfigAggregator\ConfigAggregator;
+use Laminas\ConfigAggregator\InvalidConfigProviderException;
+use LaminasTest\ConfigAggregator\Resources\BarConfigProvider;
+use LaminasTest\ConfigAggregator\Resources\FooConfigProvider;
 use org\bovigo\vfs\vfsStream;
 use PHPUnit_Framework_TestCase as TestCase;
 use StdClass;
-use Zend\ConfigAggregator\ConfigAggregator;
-use Zend\ConfigAggregator\InvalidConfigProviderException;
-use ZendTest\ConfigAggregator\Resources\BarConfigProvider;
-use ZendTest\ConfigAggregator\Resources\FooConfigProvider;
 
 class ConfigAggregatorTest extends TestCase
 {
@@ -63,7 +63,7 @@ class ConfigAggregatorTest extends TestCase
     public function testConfigAggregatorCanCacheConfig()
     {
         vfsStream::setup(__FUNCTION__);
-        $cacheFile = vfsStream::url(__FUNCTION__) . '/expressive_config_loader';
+        $cacheFile = vfsStream::url(__FUNCTION__) . '/mezzio_config_loader';
         new ConfigAggregator([
             function () {
                 return ['foo' => 'bar', ConfigAggregator::ENABLE_CACHE => true];
@@ -83,10 +83,10 @@ class ConfigAggregatorTest extends TestCase
         ];
 
         $root = vfsStream::setup(__FUNCTION__);
-        vfsStream::newFile('expressive_config_loader')
+        vfsStream::newFile('mezzio_config_loader')
             ->at($root)
             ->setContent('<' . '?php return ' . var_export($expected, true) . ';');
-        $cacheFile = vfsStream::url(__FUNCTION__ . '/expressive_config_loader');
+        $cacheFile = vfsStream::url(__FUNCTION__ . '/mezzio_config_loader');
 
         $aggregator = new ConfigAggregator([], $cacheFile);
         $mergedConfig = $aggregator->getMergedConfig();
