@@ -1,4 +1,5 @@
-vendor/
-clover.xml
-coveralls-upload.json
-phpunit.xml
+/clover.xml
+/composer.lock
+/coveralls-upload.json
+/phpunit.xml
+/vendor/
