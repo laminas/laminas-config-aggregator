@@ -1,6 +1,6 @@
 <phpunit bootstrap="./vendor/autoload.php" colors="true">
     <testsuites>
-        <testsuite name="zend-config-aggregator">
+        <testsuite name="laminas-config-aggregator">
             <directory>./test</directory>
         </testsuite>
     </testsuites>

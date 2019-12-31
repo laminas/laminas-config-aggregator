@@ -1,44 +1,19 @@
 {
-    "name": "zendframework/zend-config-aggregator",
+    "name": "laminas/laminas-config-aggregator",
     "description": "Lightweight library for collecting and merging configuration from different sources",
     "license": "BSD-3-Clause",
     "keywords": [
-        "zf",
-        "zendframework",
+        "laminas",
         "config-aggregator"
     ],
+    "homepage": "https://laminas.dev",
     "support": {
-        "docs": "https://docs.zendframework.com/zend-config-aggregator/",
-        "issues": "https://github.com/zendframework/zend-config-aggregator/issues",
-        "source": "https://github.com/zendframework/zend-config-aggregator",
-        "rss": "https://github.com/zendframework/zend-config-aggregator/releases.atom",
-        "slack": "https://zendframework-slack.herokuapp.com",
-        "forum": "https://discourse.zendframework.com/c/questions/components"
-    },
-    "require": {
-        "php": "^5.6 || ^7.0",
-        "zendframework/zend-stdlib": "^2.7.7 || ^3.1.0"
-    },
-    "require-dev": {
-        "malukenho/docheader": "^0.1.5",
-        "mikey179/vfsStream": "^1.6",
-        "phpunit/phpunit": "^5.7.21 || ^6.3",
-        "zendframework/zend-coding-standard": "~1.0.0",
-        "zendframework/zend-config": "^2.6 || ^3.0",
-        "zendframework/zend-servicemanager": "^2.7.7 || ^3.1.1"
-    },
-    "suggest": {
-        "zendframework/zend-config": "Allows loading configuration from XML, INI, YAML, and JSON files"
-    },
-    "autoload": {
-        "psr-4": {
-            "Zend\\ConfigAggregator\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "ZendTest\\ConfigAggregator\\": "test/"
-        }
+        "docs": "https://docs.laminas.dev/laminas-config-aggregator/",
+        "issues": "https://github.com/laminas/laminas-config-aggregator/issues",
+        "source": "https://github.com/laminas/laminas-config-aggregator",
+        "rss": "https://github.com/laminas/laminas-config-aggregator/releases.atom",
+        "chat": "https://laminas.dev/chat",
+        "forum": "https://discourse.laminas.dev"
     },
     "config": {
         "sort-packages": true
@@ -47,6 +22,32 @@
         "branch-alias": {
             "dev-master": "1.1.x-dev",
             "dev-develop": "1.2.x-dev"
+        }
+    },
+    "require": {
+        "php": "^5.6 || ^7.0",
+        "laminas/laminas-stdlib": "^2.7.7 || ^3.1.0",
+        "laminas/laminas-zendframework-bridge": "^1.0"
+    },
+    "require-dev": {
+        "laminas/laminas-coding-standard": "~1.0.0",
+        "laminas/laminas-config": "^2.6 || ^3.0",
+        "laminas/laminas-servicemanager": "^2.7.7 || ^3.1.1",
+        "malukenho/docheader": "^0.1.5",
+        "mikey179/vfsstream": "^1.6",
+        "phpunit/phpunit": "^5.7.21 || ^6.3"
+    },
+    "suggest": {
+        "laminas/laminas-config": "Allows loading configuration from XML, INI, YAML, and JSON files"
+    },
+    "autoload": {
+        "psr-4": {
+            "Laminas\\ConfigAggregator\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LaminasTest\\ConfigAggregator\\": "test/"
         }
     },
     "scripts": {
@@ -58,5 +59,8 @@
         "cs-fix": "phpcbf",
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
+    },
+    "replace": {
+        "zendframework/zend-config-aggregator": "self.version"
     }
 }
