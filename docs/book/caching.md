@@ -1,16 +1,16 @@
 # Caching
 
 Merging configuration on every request is not performant, particularly when
-using many configuration files. As such, zend-config-aggregator also
+using many configuration files. As such, laminas-config-aggregator also
 provides the ability to enable a filesystem-based configuration cache.
 
 To enable the configuration cache, pass a cache file name as the second
 parameter to the `ConfigAggregator` constructor:
 
 ```php
-use Zend\ConfigAggregator\ArrayProvider;
-use Zend\ConfigAggregator\ConfigAggregator;
-use Zend\ConfigAggregator\PhpFileProvider;
+use Laminas\ConfigAggregator\ArrayProvider;
+use Laminas\ConfigAggregator\ConfigAggregator;
+use Laminas\ConfigAggregator\PhpFileProvider;
 
 $aggregator = new ConfigAggregator(
     [
@@ -32,7 +32,7 @@ configuration caching in production:
 
 ```php
 <?php
-use Zend\ConfigAggregator\ConfigAggregator;
+use Laminas\ConfigAggregator\ConfigAggregator;
 
 return [
     ConfigAggregator::ENABLE_CACHE => true,
@@ -51,9 +51,9 @@ the [file mode](http://php.net/manual/en/function.chmod.php) in the
 contains sensitive information such as database passwords:
 
 ```php
-use Zend\ConfigAggregator\ArrayProvider;
-use Zend\ConfigAggregator\ConfigAggregator;
-use Zend\ConfigAggregator\PhpFileProvider;
+use Laminas\ConfigAggregator\ArrayProvider;
+use Laminas\ConfigAggregator\ConfigAggregator;
+use Laminas\ConfigAggregator\PhpFileProvider;
 
 $aggregator = new ConfigAggregator(
     [
