@@ -1,22 +1,22 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-config-aggregator for the canonical source repository
- * @copyright Copyright (c) 2016 Zend Technologies USA Inc. (http://www.zend.com)
- * @copyright Copyright (c) 2015-2016 Mateusz Tymek (http://mateusztymek.pl)
- * @license   https://github.com/zendframework/zend-config-aggregator/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-config-aggregator for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-config-aggregator/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-config-aggregator/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\ConfigAggregator;
+namespace LaminasTest\ConfigAggregator;
 
+use Laminas\ConfigAggregator\ConfigAggregator;
+use Laminas\ConfigAggregator\InvalidConfigProcessorException;
+use Laminas\ConfigAggregator\InvalidConfigProviderException;
+use LaminasTest\ConfigAggregator\Resources\BarConfigProvider;
+use LaminasTest\ConfigAggregator\Resources\FooConfigProvider;
+use LaminasTest\ConfigAggregator\Resources\FooPostProcessor;
 use PHPUnit\Framework\TestCase;
 use ReflectionMethod;
 use stdClass;
-use Zend\ConfigAggregator\ConfigAggregator;
-use Zend\ConfigAggregator\InvalidConfigProcessorException;
-use Zend\ConfigAggregator\InvalidConfigProviderException;
-use ZendTest\ConfigAggregator\Resources\BarConfigProvider;
-use ZendTest\ConfigAggregator\Resources\FooConfigProvider;
-use ZendTest\ConfigAggregator\Resources\FooPostProcessor;
 
 use function file_exists;
 use function var_export;
@@ -30,7 +30,7 @@ class ConfigAggregatorTest extends TestCase
     protected function setUp()
     {
         parent::setUp();
-        $dir = sys_get_temp_dir() . '/expressive_config_loader';
+        $dir = sys_get_temp_dir() . '/mezzio_config_loader';
         if (! is_dir($dir)) {
             mkdir($dir);
         }

@@ -131,8 +131,8 @@ array(2) {
 ```
 
 There is an extension for this feature available via the package
-[zendframework/zend-config-aggregator-parameters](https://docs.zendframework.com/zend-config-aggregator-parameters/):
+[laminas/laminas-config-aggregator-parameters](https://docs.laminas.dev/laminas-config-aggregator-parameters/):
 
 ```bash
-$ composer require zendframework/zend-config-aggregator-parameters
+$ composer require laminas/laminas-config-aggregator-parameters
 ```
