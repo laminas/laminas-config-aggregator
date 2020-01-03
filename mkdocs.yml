@@ -9,3 +9,6 @@ nav:
     - Caching: caching.md
 site_description: 'Lightweight library for collecting and merging configuration from different sources.'
 repo_url: 'https://github.com/laminas/laminas-config-aggregator'
+extra:
+    project: Components
+    project_url: 'https://docs.laminas.dev'
