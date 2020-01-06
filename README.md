@@ -1,6 +1,6 @@
 # laminas-config-aggregator
 
-[![Build Status](https://travis-ci.org/laminas/laminas-config-aggregator.svg?branch=master)](https://travis-ci.org/laminas/laminas-config-aggregator)
+[![Build Status](https://travis-ci.com/laminas/laminas-config-aggregator.svg?branch=master)](https://travis-ci.com/laminas/laminas-config-aggregator)
 [![Coverage Status](https://coveralls.io/repos/github/laminas/laminas-config-aggregator/badge.svg?branch=master)](https://coveralls.io/github/laminas/laminas-config-aggregator?branch=master)
 
 Aggregates and merges configuration, from a variety of formats. Supports caching
