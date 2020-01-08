@@ -20,7 +20,7 @@
     <div class="container">
         
         <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
-            <img src="../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+            <img src="../img/laminas-foundation-white.svg" height="28" alt="Laminas">
         </a>
         <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
             Documentation
@@ -36,13 +36,17 @@
             
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                            All Docs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="https://docs.laminas.dev/components">Components</a>
+                            <a class="dropdown-item" href="https://docs.mezzio.dev/">Mezzio</a>
+                            <a class="dropdown-item" href="https://api-tools.getlaminas.org/docs">API Tools</a>
+                            <a class="dropdown-item" href="https://docs.laminas.dev/mvc">MVC</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
@@ -230,54 +234,50 @@ arrays, or INI/YAML/XML files (using <a href="https://docs.laminas.dev/laminas-c
 handling like <a href="https://symfony.com/doc/current/service_container/parameters.html#parameters-in-configuration-files">symfony/dependency-injection</a></p>
 <h2 id="basic-usage">Basic usage</h2>
 <p>The standalone <code>ConfigAggregator</code> can be used to merge PHP-based configuration files:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\ConfigAggregator\ConfigAggregator;</span>
-<span class=x>use Laminas\ConfigAggregator\PhpFileProvider;</span>
+<pre class=codehilite><code class=language-php>use Laminas\ConfigAggregator\ConfigAggregator;
+use Laminas\ConfigAggregator\PhpFileProvider;
 
-<span class=x>$aggregator = new ConfigAggregator([</span>
-<span class=x>    new PhpFileProvider(&#39;*.global.php&#39;),</span>
-<span class=x>]);</span>
+$aggregator = new ConfigAggregator([
+    new PhpFileProvider('*.global.php'),
+]);
 
-<span class=x>var_dump($aggregator-&gt;getMergedConfig());</span>
-</pre></div></p>
+var_dump($aggregator-&gt;getMergedConfig());</code></pre>
 <p>Using this provider, each file should return a PHP array:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>// db.global.php</span>
-<span class=x>return [</span>
-<span class=x>    &#39;db&#39; =&gt; [</span>
-<span class=x>        &#39;dsn&#39; =&gt; &#39;mysql:...&#39;,</span>
-<span class=x>    ],</span>
-<span class=x>];</span>
+<pre class=codehilite><code class=language-php>// db.global.php
+return [
+    'db' =&gt; [
+        'dsn' =&gt; 'mysql:...',
+    ],
+];
 
-<span class=x>// cache.global.php</span>
-<span class=x>return [</span>
-<span class=x>    &#39;cache_storage&#39; =&gt; &#39;redis&#39;,</span>
-<span class=x>    &#39;redis&#39; =&gt; [ ... ],</span>
-<span class=x>];</span>
-</pre></div></p>
+// cache.global.php
+return [
+    'cache_storage' =&gt; 'redis',
+    'redis' =&gt; [ ... ],
+];</code></pre>
 <p>Result:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>array(3) {</span>
-<span class=x>  &#39;db&#39; =&gt;</span>
-<span class=x>  array(1) {</span>
-<span class=x>    &#39;dsn&#39; =&gt;</span>
-<span class=x>    string(9) &quot;mysql:...&quot;</span>
-<span class=x>  }</span>
-<span class=x>  &#39;cache_storage&#39; =&gt;</span>
-<span class=x>  string(5) &quot;redis&quot;</span>
-<span class=x>  &#39;redis&#39; =&gt;</span>
-<span class=x>  array(0) {</span>
-<span class=x>     ...</span>
-<span class=x>  }</span>
-<span class=x>}</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>array(3) {
+  'db' =&gt;
+  array(1) {
+    'dsn' =&gt;
+    string(9) &quot;mysql:...&quot;
+  }
+  'cache_storage' =&gt;
+  string(5) &quot;redis&quot;
+  'redis' =&gt;
+  array(0) {
+     ...
+  }
+}</code></pre>
 <p>Configuration is merged in the same order as it is passed, with later entries having precedence.</p>
 <p>Together with <code>laminas-config</code>, <code>laminas-config-aggregator</code> can be also used to load
 configuration in different formats, including YAML, JSON, XML, or INI:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\ConfigAggregator\ConfigAggregator;</span>
-<span class=x>use Laminas\ConfigAggregator\LaminasConfigProvider;</span>
+<pre class=codehilite><code class=language-php>use Laminas\ConfigAggregator\ConfigAggregator;
+use Laminas\ConfigAggregator\LaminasConfigProvider;
 
-<span class=x>$aggregator = new ConfigAggregator([</span>
-<span class=x>    new LaminasConfigProvider(&#39;config/*.{json,yaml,php}&#39;),</span>
-<span class=x>]);</span>
-</pre></div></p>
+$aggregator = new ConfigAggregator([
+    new LaminasConfigProvider('config/*.{json,yaml,php}'),
+]);</code></pre>
 <p>You can also supply <a href="../config-post-processors/">post processors</a> for
 configuration. These are PHP callables that accept the merged configuration as
 an argument, do something with it, and return configuration on completion. This
@@ -423,9 +423,10 @@ multiple locations and resolving them to a single value later.</p>
             <div class="col-md-7 offset-md-2">
                 <h5>Laminas</h5>
                 <ul>
-                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
-                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
-                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                    <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
+                    <li>Laminas Components and MVC <a href="https://docs.laminas.dev/">Components and MVC for enterprise applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
+                    <li>Laminas API Tools <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
                 </ul>
             </div>
         </div>
@@ -462,7 +463,7 @@ multiple locations and resolving them to a single value later.</p>
                 <h4 class="footer__headline">License</h4>
                 <p>
                     Code licensed under <a
-                        href="https://github.com/laminas/laminas-config-aggregator//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                        href="https://github.com/laminas/laminas-config-aggregator/blob/master/LICENSE.md">BSD 3-Clause</a>.
                 </p>
             </div>
 
@@ -471,8 +472,8 @@ multiple locations and resolving them to a single value later.</p>
                 <h4 class="footer__headline">Copyright</h4>
                 <p>
                     <!--Built with love by the Laminas team with the help of our
-                    <a href="https://github.com/laminas/laminas-config-aggregator//graphs/contributors">contributors</a>.<br>-->
-                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                    <a href="https://github.com/laminas/laminas-config-aggregator/graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2020 by <a href="https://getlaminas.org/">The Laminas Project</a>.
                 </p>
             </div>
         </div>

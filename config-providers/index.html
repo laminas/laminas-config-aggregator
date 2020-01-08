@@ -20,7 +20,7 @@
     <div class="container">
         
         <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
-            <img src="../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+            <img src="../img/laminas-foundation-white.svg" height="28" alt="Laminas">
         </a>
         <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
             Documentation
@@ -36,13 +36,17 @@
             
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                            All Docs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="https://docs.laminas.dev/components">Components</a>
+                            <a class="dropdown-item" href="https://docs.mezzio.dev/">Mezzio</a>
+                            <a class="dropdown-item" href="https://api-tools.getlaminas.org/docs">API Tools</a>
+                            <a class="dropdown-item" href="https://docs.laminas.dev/mvc">MVC</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
@@ -224,14 +228,13 @@
 <p>The <code>ConfigAggregator</code> works by aggregating "config providers" passed to its
 constructor.  Each provider should be a callable, returning a configuration
 array (or a PHP generator) to be merged.</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$aggregator = new ConfigAggregator([</span>
-<span class=x>    function () {</span>
-<span class=x>        return [&#39;foo&#39; =&gt; &#39;bar&#39;];</span>
-<span class=x>    },</span>
-<span class=x>    new PhpFileProvider(&#39;*.global.php&#39;),</span>
-<span class=x>]);</span>
-<span class=x>var_dump($aggregator-&gt;getMergedConfig());</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>$aggregator = new ConfigAggregator([
+    function () {
+        return ['foo' =&gt; 'bar'];
+    },
+    new PhpFileProvider('*.global.php'),
+]);
+var_dump($aggregator-&gt;getMergedConfig());</code></pre>
 <p>If the provider is a class name, the aggregator automatically instantiates it
 before invoking it; as such, any class name you use as a config provider <em>must</em>
 also define <code>__invoke()</code>, and that method <em>must</em> return an array.</p>
@@ -241,71 +244,66 @@ will be available to your application.</p>
 <p>As a library owner, you can distribute your own configuration providers that
 provide default values for use with your library.</p>
 <p>As an example:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>class ApplicationConfig</span>
-<span class=x>{</span>
-<span class=x>    public function __invoke()</span>
-<span class=x>    {</span>
-<span class=x>        return [&#39;foo&#39; =&gt; &#39;bar&#39;];</span>
-<span class=x>    }</span>
-<span class=x>}</span>
+<pre class=codehilite><code class=language-php>class ApplicationConfig
+{
+    public function __invoke()
+    {
+        return ['foo' =&gt; 'bar'];
+    }
+}
 
-<span class=x>$aggregator = new ConfigAggregator([</span>
-<span class=x>    ApplicationConfig::class,</span>
-<span class=x>    new PhpFileProvider(&#39;*.global.php&#39;),</span>
-<span class=x>]);</span>
-<span class=x>var_dump($aggregator-&gt;getMergedConfig());</span>
-</pre></div></p>
+$aggregator = new ConfigAggregator([
+    ApplicationConfig::class,
+    new PhpFileProvider('*.global.php'),
+]);
+var_dump($aggregator-&gt;getMergedConfig());</code></pre>
 <p>Output from both examples will be the same:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>array(4) {</span>
-<span class=x>  &#39;foo&#39; =&gt;</span>
-<span class=x>  string(3) &quot;bar&quot;</span>
-<span class=x>  &#39;db&#39; =&gt;</span>
-<span class=x>  array(1) {</span>
-<span class=x>    &#39;dsn&#39; =&gt;</span>
-<span class=x>    string(9) &quot;mysql:...&quot;</span>
-<span class=x>  }</span>
-<span class=x>  &#39;cache_storage&#39; =&gt;</span>
-<span class=x>  string(5) &quot;redis&quot;</span>
-<span class=x>  &#39;redis&#39; =&gt;</span>
-<span class=x>  array(0) {</span>
-<span class=x>  }</span>
-<span class=x>}</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>array(4) {
+  'foo' =&gt;
+  string(3) &quot;bar&quot;
+  'db' =&gt;
+  array(1) {
+    'dsn' =&gt;
+    string(9) &quot;mysql:...&quot;
+  }
+  'cache_storage' =&gt;
+  string(5) &quot;redis&quot;
+  'redis' =&gt;
+  array(0) {
+  }
+}</code></pre>
 <h3>Generators</h3>
 <p>Config providers can be written as generators. This way, a single callable can
 provide multiple configurations:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\ConfigAggregator\ConfigAggregator;</span>
-<span class=x>use Laminas\Stdlib\Glob;</span>
+<pre class=codehilite><code class=language-php>use Laminas\ConfigAggregator\ConfigAggregator;
+use Laminas\Stdlib\Glob;
 
-<span class=x>$aggregator = new ConfigAggregator([</span>
-<span class=x>    function () {</span>
-<span class=x>        foreach (Glob::glob(&#39;data/*.global.php&#39;, Glob::GLOB_BRACE) as $file) {</span>
-<span class=x>            yield include $file;</span>
-<span class=x>        }</span>
-<span class=x>    },</span>
-<span class=x>]);</span>
-<span class=x>var_dump($aggregator-&gt;getMergedConfig());</span>
-</pre></div></p>
+$aggregator = new ConfigAggregator([
+    function () {
+        foreach (Glob::glob('data/*.global.php', Glob::GLOB_BRACE) as $file) {
+            yield include $file;
+        }
+    },
+]);
+var_dump($aggregator-&gt;getMergedConfig());</code></pre>
 <p>The <code>PhpFileProvider</code> is implemented as a generator.</p>
 <h2 id="available-config-providers">Available config providers</h2>
 <h3>PhpFileProvider</h3>
 <p>Loads configuration from PHP files returning arrays, such as this one:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>return [</span>
-<span class=x>    &#39;db&#39; =&gt; [</span>
-<span class=x>        &#39;dsn&#39; =&gt; &#39;mysql:...&#39;,</span>
-<span class=x>    ],</span>
-<span class=x>];</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>return [
+    'db' =&gt; [
+        'dsn' =&gt; 'mysql:...',
+    ],
+];</code></pre>
 <p>Wildcards are supported:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\ConfigAggregator\ConfigAggregator;</span>
-<span class=x>use Laminas\ConfigAggregator\PhpFileProvider;</span>
+<pre class=codehilite><code class=language-php>use Laminas\ConfigAggregator\ConfigAggregator;
+use Laminas\ConfigAggregator\PhpFileProvider;
 
-<span class=x>$aggregator = new ConfigAggregator(</span>
-<span class=x>    [</span>
-<span class=x>        new PhpFileProvider(&#39;config/*.global.php&#39;),</span>
-<span class=x>    ]</span>
-<span class=x>);</span>
-</pre></div></p>
+$aggregator = new ConfigAggregator(
+    [
+        new PhpFileProvider('config/*.global.php'),
+    ]
+);</code></pre>
 <p>The example above will merge all matching files from the <code>config/</code> directory. If
 you have files such as <code>app.global.php</code> or <code>database.global.php</code> in that
 directory, they will be loaded using this above lines of code.</p>
@@ -320,26 +318,23 @@ utilize this feature.</p>
 configuration from multiple files of different formats, such as INI, JSON, YAML,
 or XML.  laminas-config-aggregator allows you to do so via its
 <code>LaminasConfigProvider</code>. This feature requires first installing laminas-config:</p>
-<p> <div class=codehilite><pre><span></span>$ composer require laminas/laminas-config
-</pre></div></p>
+<pre class=codehilite><code class=language-bash>$ composer require laminas/laminas-config</code></pre>
 <p>Once installed, you may use as many <code>LaminasConfigProvider</code> instances as you need:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\ConfigAggregator\ConfigAggregator;</span>
-<span class=x>use Laminas\ConfigAggregator\LaminasConfigProvider;</span>
+<pre class=codehilite><code class=language-php>use Laminas\ConfigAggregator\ConfigAggregator;
+use Laminas\ConfigAggregator\LaminasConfigProvider;
 
-<span class=x>$aggregator = new ConfigAggregator(</span>
-<span class=x>    [</span>
-<span class=x>        new LaminasConfigProvider(&#39;*.global.json&#39;),</span>
-<span class=x>        new LaminasConfigProvider(&#39;database.local.ini&#39;),</span>
-<span class=x>    ]</span>
-<span class=x>);</span>
-</pre></div></p>
+$aggregator = new ConfigAggregator(
+    [
+        new LaminasConfigProvider('*.global.json'),
+        new LaminasConfigProvider('database.local.ini'),
+    ]
+);</code></pre>
 <p>These could even be combined into a single glob statement:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$aggregator = new ConfigAggregator(</span>
-<span class=x>    [</span>
-<span class=x>        new LaminasConfigProvider(&#39;*.global.json,database.local.ini&#39;),</span>
-<span class=x>    ]</span>
-<span class=x>);</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>$aggregator = new ConfigAggregator(
+    [
+        new LaminasConfigProvider('*.global.json,database.local.ini'),
+    ]
+);</code></pre>
 <p><code>LaminasConfigProvider</code> accepts wildcards and globs, and autodetects the config
 type based on file extension.</p>
 <p>Some config readers (in particular, YAML) may need additional dependencies;
@@ -353,17 +348,15 @@ This provider introspects the module class for its <code>Module::getConfig()</co
 as well as its <code>Module::getServiceConfig()</code> method (declared via the
 <code>ServiceProviderInterface</code>).</p>
 <p>To use the extension, first install its package:</p>
-<p> <div class=codehilite><pre><span></span>$ composer require laminas/laminas-config-aggregator-modulemanager
-</pre></div></p>
+<pre class=codehilite><code class=language-bash>$ composer require laminas/laminas-config-aggregator-modulemanager</code></pre>
 <p>Once installed, you may use as many <code>LaminasModuleProvider</code> instances as you need:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\ConfigAggregator\ConfigAggregator;</span>
-<span class=x>use Laminas\ConfigAggregatorModuleManager\LaminasModuleProvider;</span>
-<span class=x>use ACME;</span>
+<pre class=codehilite><code class=language-php>use Laminas\ConfigAggregator\ConfigAggregator;
+use Laminas\ConfigAggregatorModuleManager\LaminasModuleProvider;
+use ACME;
 
-<span class=x>$aggregator = new ConfigAggregator([</span>
-<span class=x>    new LaminasModuleProvider(new ACME\Module()),</span>
-<span class=x>]);</span>
-</pre></div></p>
+$aggregator = new ConfigAggregator([
+    new LaminasModuleProvider(new ACME\Module()),
+]);</code></pre>
 <p><code>LaminasModuleProvider</code> accepts any object which represents a <code>laminas-mvc</code> module.
 For more details, please refer to the <a href="https://docs.laminas.dev/laminas-config-aggregator-modulemanager/">laminas-config-aggregator-modulemanager manual</a>.</p>
 
@@ -506,9 +499,10 @@ For more details, please refer to the <a href="https://docs.laminas.dev/laminas-
             <div class="col-md-7 offset-md-2">
                 <h5>Laminas</h5>
                 <ul>
-                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
-                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
-                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                    <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
+                    <li>Laminas Components and MVC <a href="https://docs.laminas.dev/">Components and MVC for enterprise applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
+                    <li>Laminas API Tools <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
                 </ul>
             </div>
         </div>
@@ -545,7 +539,7 @@ For more details, please refer to the <a href="https://docs.laminas.dev/laminas-
                 <h4 class="footer__headline">License</h4>
                 <p>
                     Code licensed under <a
-                        href="https://github.com/laminas/laminas-config-aggregator//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                        href="https://github.com/laminas/laminas-config-aggregator/blob/master/LICENSE.md">BSD 3-Clause</a>.
                 </p>
             </div>
 
@@ -554,8 +548,8 @@ For more details, please refer to the <a href="https://docs.laminas.dev/laminas-
                 <h4 class="footer__headline">Copyright</h4>
                 <p>
                     <!--Built with love by the Laminas team with the help of our
-                    <a href="https://github.com/laminas/laminas-config-aggregator//graphs/contributors">contributors</a>.<br>-->
-                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                    <a href="https://github.com/laminas/laminas-config-aggregator/graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2020 by <a href="https://getlaminas.org/">The Laminas Project</a>.
                 </p>
             </div>
         </div>

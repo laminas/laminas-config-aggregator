@@ -6,10 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Lightweight library for collecting and merging configuration from different sources.">  
-    <link rel="canonical" href="https://docs.laminas.dev/config-post-processors/">
     <link rel="shortcut icon" href="/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>Post Processors - laminas-config-aggregator - Laminas Docs</title>
+    <title>laminas-config-aggregator - Laminas Docs</title>
 
     <link rel="stylesheet" href="/css/styles.css">
 </head>
@@ -59,7 +58,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="..">laminas-config-aggregator</a>
+            <a href="../.">laminas-config-aggregator</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -101,8 +100,8 @@
                     
                     
                         
-                            <li class="subnavigation__list-item subnavigation__list-item--active">
-                                <a href="./" class="subnavigation__link">Post Processors</a>
+                            <li class="subnavigation__list-item ">
+                                <a href="../config-post-processors/" class="subnavigation__link">Post Processors</a>
                             </li>
                         
                     
@@ -181,201 +180,21 @@
         <div class="row">
             <div class="col-md-2 col-sm-12">
                 
-    
-
-    
-    
-        <div class="toc">
-            <h6 class="toc__headline">On this page</h6>
-            <ul class="toc__list">
-                
-                    <li class="toc__entry">
-                        <a href="#post-processor-examples" class="toc__link">Post processor examples</a>
-                    </li>
-                
-            </ul>
-        </div>
-    
-
             </div>
             <div class="col-md-7 col-sm-12 content" role="main" data-spy="scroll" data-target=".toc">
                 
-                    <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        
-            <li class="breadcrumb-item"><a href="">Overview</a></li>
 
-            
-                <li class="breadcrumb-item"><a href="..">laminas-config-aggregator</a></li>
+<h1 class="content__title">404</h1>
+<blockquote>
+    <h3>Something went wrong!</h3>
+    <p>
+        We're sorry, but the page you are looking for does not exist.
+    </p>
+</blockquote>
 
-                
-
-                <li class="breadcrumb-item active" aria-current="page">Post Processors</li>
-            
-        
-    </ol>
-</nav>
+<a href="../." class="btn btn-default" role="button">Go to homepage</a>
 
 
-
-
-
-
-    
-    
-
-    <h1 id="post-processors">Post processors</h1>
-<p>The <code>ConfigAggregator</code> can apply post processors to the merged configuration by
-aggregating "config processors" passed to its constructor. Each processor
-should be a PHP <code>callable</code> which consumes the merged configuration as its sole
-argument, and which then returns the processed configuration array.</p>
-<pre class=codehilite><code class=language-php>$providers = [
-    function () {
-        return ['foo' =&gt; 'bar'];
-    },
-    new PhpFileProvider('*.global.php'),
-];
-
-$processors = [
-    function (array $config) {
-        return $config + ['post-processed' =&gt; true];
-    },
-];
-
-$aggregator = new ConfigAggregator($providers, null, $processors);
-var_dump($aggregator-&gt;getMergedConfig());</code></pre>
-<p>Output from the example:</p>
-<pre class=codehilite><code class=language-php>array(2) {
-  'foo' =&gt;
-  string(3) &quot;bar&quot;
-  'post-processed' =&gt;
-  bool(true)
-}</code></pre>
-<p>If the processor is a class name, the aggregator automatically instantiates it
-before invoking it; as such, any class name you use as a config provider
-<strong>must</strong> also define <code>__invoke()</code>, and that method <strong>must</strong> return an array and
-<strong>may</strong> consume the merged configuration as a parameter.</p>
-<p>Post processors can be used to mimic tools such as the <a href="https://symfony.com/doc/current/service_container/parameters.html">Symfony configuration
-parameter system</a>.
-As an example, you can specify a config processor which consumes the merged
-configuration and resolves templated parameters to other parameters within your
-configuration.</p>
-<h2 id="post-processor-examples">Post processor examples</h2>
-<h3>Symfony ParameterBag Post Processor</h3>
-<p>The following example resolves templated parameters to either other parameters
-within your configuration, or a static set of substitutions. Templated
-parameters have the format <code>%&lt;config_key&gt;%</code>; <code>.</code> characters indicate an
-additional level of nesting. If you want to provide configuration parameters
-with <code>%</code> in the value, you must escape any occurences of <code>%</code> by using another
-<code>%</code>; as examples, <code>%%bar</code> or <code>%%foo%%</code>.</p>
-<p>In the following example, we define a provider that returns a nested array of
-configuration. We then define additional parameters and pass them to a 
-Symfony DI <code>ParameterBag</code>, which we develop a closure over. This closure checks
-for parameters in the passed configuration itself, and then attempts to resolve
-all configuration values based on the parameters in the <code>ParameterBag</code>.</p>
-<pre class=codehilite><code class=language-php>$provider = [
-    function () {
-        return [
-            'session' =&gt; [
-                'cookie_domain' =&gt; '%cookie_domain%',
-            ],
-            'tracking' =&gt; [
-                'cookie_domain' =&gt; '%cookie_domain%',
-            ],
-            // Will be converted to %foo% after resolving
-            'config_parameter_with_percent' =&gt; '%%foo%%',
-        ];
-    },
-];
-
-$parameters = [
-    'cookie_domain' =&gt; 'example.com',
-];
-
-$bag = new \Symfony\Component\DependencyInjection\ParameterBag\ParameterBag($parameters);
-$resolver = function (array $config) use ($bag) {
-    $parametersFromConfiguration = isset($config['parameters']) ? $config['parameters'] : [];
-    $bag-&gt;add($parametersFromConfiguration);
-
-    // Resolve parameters which probably base on parameters
-    $bag-&gt;resolve();
-
-    // Replace all parameters within the configuration
-    $resolved = $bag-&gt;resolveValue($config);
-    $resolved['parameters'] = $bag-&gt;all();
-
-    return $bag-&gt;unescapeValue($resolved);
-};
-
-$aggregator = new ConfigAggregator($provider, null, [
-    $resolver,
-]);
-
-var_dump($aggregator-&gt;getMergedConfig());</code></pre>
-<p>The above would result in the following when complete:</p>
-<pre class=codehilite><code class=language-php>array(2) {
-  'session' =&gt;
-  array(1) {
-    'cookie_domain' =&gt;
-    string(11) &quot;example.com&quot;
-  }
-  'tracking' =&gt;
-  array(1) {
-    'cookie_domain' =&gt;
-    string(11) &quot;example.com&quot;
-  }
-  'config_parameter_with_percent' =&gt;
-    string(7) &quot;%foo%&quot;
-  }
-  'parameters' =&gt;
-  array(1) {
-    'cookie_domain' =&gt;
-    string(11) &quot;example.com&quot;
-  }
-}</code></pre>
-<p>There is an extension for this feature available via the package
-<a href="https://docs.laminas.dev/laminas-config-aggregator-parameters/">laminas/laminas-config-aggregator-parameters</a>:</p>
-<pre class=codehilite><code class=language-bash>$ composer require laminas/laminas-config-aggregator-parameters</code></pre>
-
-
-
-
-    <nav>
-    <ul class="page-nav hidden-print">
-
-        
-        <li class="page-nav__item">
-            
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../config-providers/">
-                    <i class="fa fa-chevron-left"></i> Previous
-                </a>
-            
-        </li>
-
-        
-        <li class="page-nav__item">
-            
-                <a rel="next" class="page-nav__link page-nav__link--next" href="../caching/">
-                    Next <i class="fa fa-chevron-right"></i>
-                </a>
-            
-        </li>
-    </ul>
-</nav>
-
-
-
-
-    <div class="help-wanted">
-        <p>
-            Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/laminas/laminas-config-aggregator/edit/master/docs/book/config-post-processors.md" target="_blank" class="help-wanted__link">
-                Edit this page on GitHub!
-            </a>
-        </p>
-    </div>
-
-                
             </div>
             <div class="col-md-3 col-sm-12 sidebar">
                 
@@ -390,7 +209,7 @@ var_dump($aggregator-&gt;getMergedConfig());</code></pre>
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="..">laminas-config-aggregator</a>
+            <a href="../.">laminas-config-aggregator</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -432,8 +251,8 @@ var_dump($aggregator-&gt;getMergedConfig());</code></pre>
                     
                     
                         
-                            <li class="subnavigation__list-item subnavigation__list-item--active">
-                                <a href="./" class="subnavigation__link">Post Processors</a>
+                            <li class="subnavigation__list-item ">
+                                <a href="../config-post-processors/" class="subnavigation__link">Post Processors</a>
                             </li>
                         
                     
