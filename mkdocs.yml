@@ -2,7 +2,7 @@ site_name: laminas-config-aggregator
 docs_dir: docs/book
 site_dir: docs/html
 nav:
-    - index.md
+    - Home: index.md
     - Introduction: intro.md
     - 'Config Providers': config-providers.md
     - 'Post Processors': config-post-processors.md
