@@ -2,7 +2,7 @@ site_name: laminas-config-aggregator
 docs_dir: docs/book
 site_dir: docs/html
 nav:
-    - index.md
+    - Home: index.md
     - Introduction: intro.md
     - 'Config Providers': config-providers.md
     - 'Post Processors': config-post-processors.md
@@ -11,4 +11,3 @@ site_description: 'Lightweight library for collecting and merging configuration 
 repo_url: 'https://github.com/laminas/laminas-config-aggregator'
 extra:
     project: Components
-    project_url: 'https://docs.laminas.dev'
