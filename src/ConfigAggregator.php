@@ -287,6 +287,8 @@ EOT;
 
         if ($mode !== null) {
             chmod($tempFile, $mode);
+            touch($cachedConfigFile);
+            chmod($cachedConfigFile, $mode);
         }
 
         ftruncate($fh, 0);
@@ -298,10 +300,13 @@ EOT;
             var_export($config, true)
         ));
 
-        rename($tempFile, $cachedConfigFile);
+        // Windows doesn't like renaming an open file, so copy and unlink
+        copy($tempFile, $cachedConfigFile);
 
         flock($fh, LOCK_UN);
         fclose($fh);
+
+        unlink($tempFile);
     }
 
     /**
