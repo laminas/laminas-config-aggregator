@@ -125,11 +125,14 @@ class ConfigAggregatorTest extends TestCase
     {
         $this->expectException(RenameException::class);
         chmod(dirname($this->cacheFile), 0400);
-        new ConfigAggregator([
-            function () {
-                return ['foo' => 'bar', ConfigAggregator::ENABLE_CACHE => true];
-            }
-        ], $this->cacheFile);
+        $suppressNotice = function () {
+            new ConfigAggregator([
+                function () {
+                    return ['foo' => 'bar', ConfigAggregator::ENABLE_CACHE => true];
+                }
+            ], $this->cacheFile);
+        };
+        @$suppressNotice(); // suppress "file created in the system's temporary directory"
     }
 
     public function testConfigAggregatorCanLoadConfigFromCache()
