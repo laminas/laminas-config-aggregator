@@ -17,7 +17,6 @@ use LaminasTest\ConfigAggregator\Resources\FooPostProcessor;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
-use Webimpress\SafeWriter\Exception\RenameException;
 use function file_exists;
 use function var_export;
 
@@ -121,18 +120,16 @@ class ConfigAggregatorTest extends TestCase
         $this->assertEquals(0600, fileperms($this->cacheFile) & 0777);
     }
 
-    public function testConfigAggregatorThrowsExceptionOnUnwritableCache()
+    public function testConfigAggregatorSetsHandlesUnwritableCache()
     {
-        $this->expectException(RenameException::class);
         chmod(dirname($this->cacheFile), 0400);
-        $suppressNotice = function () {
-            new ConfigAggregator([
-                function () {
-                    return ['foo' => 'bar', ConfigAggregator::ENABLE_CACHE => true];
-                }
-            ], $this->cacheFile);
-        };
-        @$suppressNotice(); // suppress "file created in the system's temporary directory"
+        new ConfigAggregator([
+            function () {
+                return ['foo' => 'bar', ConfigAggregator::ENABLE_CACHE => true];
+            }
+        ], $this->cacheFile);
+
+        $this->assertFalse(file_exists($this->cacheFile));
     }
 
     public function testConfigAggregatorCanLoadConfigFromCache()

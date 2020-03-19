@@ -12,6 +12,7 @@ use Closure;
 use Generator;
 use Laminas\Stdlib\ArrayUtils\MergeRemoveKey;
 use Laminas\Stdlib\ArrayUtils\MergeReplaceKeyInterface;
+use Webimpress\SafeWriter\Exception\ExceptionInterface as FileWriterException;
 use Webimpress\SafeWriter\FileWriter;
 
 use function array_key_exists;
@@ -25,7 +26,10 @@ use function is_callable;
 use function is_int;
 use function is_object;
 use function is_string;
+use function restore_error_handler;
+use function set_error_handler;
 use function sprintf;
+use function strpos;
 use function var_export;
 
 /**
@@ -259,7 +263,6 @@ EOT;
      *
      * @param array $config
      * @param null|string $cachedConfigFile
-     * @param int $mode
      */
     private function cacheConfig(array $config, $cachedConfigFile)
     {
@@ -278,11 +281,8 @@ EOT;
             var_export($config, true)
         );
 
-        if (isset($config[self::CACHE_FILEMODE])) {
-            FileWriter::writeFile($cachedConfigFile, $contents, $config[self::CACHE_FILEMODE]);
-        } else {
-            FileWriter::writeFile($cachedConfigFile, $contents);
-        }
+        $mode = isset($config[self::CACHE_FILEMODE]) ? $config[self::CACHE_FILEMODE] : null;
+        $this->writeCache($cachedConfigFile, $contents, $mode);
     }
 
     /**
@@ -318,5 +318,33 @@ EOT;
         }
 
         return gettype($variable);
+    }
+
+    /**
+     * Attempt to cache discovered configuration.
+     *
+     * @param string $cachedConfigFile
+     * @param null|string $contents
+     * @param null|int $mode
+     */
+    private function writeCache($cachedConfigFile, $contents, $mode)
+    {
+        // Suppresses notice when FileWriter falls back to system temp dir
+        // This can be removed if https://github.com/webimpress/safe-writer/pull/6 is merged
+        set_error_handler(function ($errno, $errstr) {
+            return strpos('tempnam():', $errstr) !== 0;
+        }, E_NOTICE);
+
+        try {
+            if ($mode !== null) {
+                FileWriter::writeFile($cachedConfigFile, $contents, $mode);
+            } else {
+                FileWriter::writeFile($cachedConfigFile, $contents);
+            }
+        } catch (FileWriterException $e) {
+            // ignore errors writing cache file
+        }
+
+        restore_error_handler();
     }
 }
