@@ -12,8 +12,8 @@ use Closure;
 use Generator;
 use Laminas\Stdlib\ArrayUtils\MergeRemoveKey;
 use Laminas\Stdlib\ArrayUtils\MergeReplaceKeyInterface;
-
 use Webimpress\SafeWriter\FileWriter;
+
 use function array_key_exists;
 use function class_exists;
 use function date;
