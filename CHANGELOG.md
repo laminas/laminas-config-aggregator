@@ -28,7 +28,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#5](https://github.com/laminas/laminas-config-aggregator/pull/5) adds support for PHP 7.4.
 
 ### Changed
 

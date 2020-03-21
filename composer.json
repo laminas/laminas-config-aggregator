@@ -35,7 +35,7 @@
         "laminas/laminas-config": "^2.6 || ^3.0",
         "laminas/laminas-servicemanager": "^2.7.7 || ^3.1.1",
         "malukenho/docheader": "^0.1.5",
-        "phpunit/phpunit": "^5.7.21 || ^6.3"
+        "phpunit/phpunit": "^5.7.27 || ^6.5.14 || ^7.5.20"
     },
     "suggest": {
         "laminas/laminas-config": "Allows loading configuration from XML, INI, YAML, and JSON files",
