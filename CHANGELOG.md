@@ -22,7 +22,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#4](https://github.com/laminas/laminas-config-aggregator/pull/4) fixes creating cache file on Windows. Internally we are using now [webimpress/safe-writer](https://github.com/webimpress/safe-writer) to write cache files.
 
 ## 1.2.0 - 2019-12-27
 
