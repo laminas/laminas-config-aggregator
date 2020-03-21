@@ -329,12 +329,6 @@ EOT;
      */
     private function writeCache($cachedConfigFile, $contents, $mode)
     {
-        // Suppresses notice when FileWriter falls back to system temp dir
-        // This can be removed if https://github.com/webimpress/safe-writer/pull/6 is merged
-        set_error_handler(function ($errno, $errstr) {
-            return strpos('tempnam():', $errstr) !== 0;
-        }, E_NOTICE);
-
         try {
             if ($mode !== null) {
                 FileWriter::writeFile($cachedConfigFile, $contents, $mode);
@@ -344,7 +338,5 @@ EOT;
         } catch (FileWriterException $e) {
             // ignore errors writing cache file
         }
-
-        restore_error_handler();
     }
 }

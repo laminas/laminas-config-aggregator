@@ -28,7 +28,7 @@
         "php": "^5.6 || ^7.0",
         "laminas/laminas-stdlib": "^2.7.7 || ^3.1.0",
         "laminas/laminas-zendframework-bridge": "^1.0",
-        "webimpress/safe-writer": "^1.0.1 || ^2.0"
+        "webimpress/safe-writer": "^1.0.2 || ^2.0.1"
     },
     "require-dev": {
         "laminas/laminas-coding-standard": "~1.0.0",
