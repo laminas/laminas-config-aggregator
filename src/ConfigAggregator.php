@@ -12,17 +12,13 @@ use Closure;
 use Generator;
 use Laminas\Stdlib\ArrayUtils\MergeRemoveKey;
 use Laminas\Stdlib\ArrayUtils\MergeReplaceKeyInterface;
+use Webimpress\SafeWriter\Exception\ExceptionInterface as FileWriterException;
+use Webimpress\SafeWriter\FileWriter;
 
 use function array_key_exists;
-use function chmod;
 use function class_exists;
 use function date;
-use function fclose;
 use function file_exists;
-use function flock;
-use function fopen;
-use function fputs;
-use function ftruncate;
 use function get_class;
 use function gettype;
 use function is_array;
@@ -30,7 +26,10 @@ use function is_callable;
 use function is_int;
 use function is_object;
 use function is_string;
+use function restore_error_handler;
+use function set_error_handler;
 use function sprintf;
+use function strpos;
 use function var_export;
 
 /**
@@ -156,10 +155,13 @@ EOT;
     /**
      * Perform a recursive merge of two multi-dimensional arrays.
      *
+     * @codingStandardsIgnoreStart
      * Copied from https://github.com/laminas/laminas-stdlib/blob/980ce463c29c1a66c33e0eb67961bba895d0e19e/src/ArrayUtils.php#L269
+     * @codingStandardsIgnoreEnd
      *
      * @param array $a
      * @param array $b
+     *
      * @return $a
      */
     private function mergeArray(array $a, array $b)
@@ -261,7 +263,6 @@ EOT;
      *
      * @param array $config
      * @param null|string $cachedConfigFile
-     * @param int $mode
      */
     private function cacheConfig(array $config, $cachedConfigFile)
     {
@@ -273,35 +274,15 @@ EOT;
             return;
         }
 
-        $mode = isset($config[self::CACHE_FILEMODE]) ? $config[self::CACHE_FILEMODE] : null;
-        $tempFile = sys_get_temp_dir() . '/' . basename($cachedConfigFile) . '.tmp';
-
-        $fh = fopen($tempFile, 'c');
-        if (! $fh) {
-            return;
-        }
-        if (! flock($fh, LOCK_EX | LOCK_NB)) {
-            fclose($fh);
-            return;
-        }
-
-        if ($mode !== null) {
-            chmod($tempFile, $mode);
-        }
-
-        ftruncate($fh, 0);
-
-        fputs($fh, sprintf(
+        $contents = sprintf(
             self::CACHE_TEMPLATE,
             get_class($this),
             date('c'),
             var_export($config, true)
-        ));
+        );
 
-        rename($tempFile, $cachedConfigFile);
-
-        flock($fh, LOCK_UN);
-        fclose($fh);
+        $mode = isset($config[self::CACHE_FILEMODE]) ? $config[self::CACHE_FILEMODE] : null;
+        $this->writeCache($cachedConfigFile, $contents, $mode);
     }
 
     /**
@@ -337,5 +318,25 @@ EOT;
         }
 
         return gettype($variable);
+    }
+
+    /**
+     * Attempt to cache discovered configuration.
+     *
+     * @param string $cachedConfigFile
+     * @param null|string $contents
+     * @param null|int $mode
+     */
+    private function writeCache($cachedConfigFile, $contents, $mode)
+    {
+        try {
+            if ($mode !== null) {
+                FileWriter::writeFile($cachedConfigFile, $contents, $mode);
+            } else {
+                FileWriter::writeFile($cachedConfigFile, $contents);
+            }
+        } catch (FileWriterException $e) {
+            // ignore errors writing cache file
+        }
     }
 }
