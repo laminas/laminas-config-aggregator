@@ -63,6 +63,6 @@
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },
     "replace": {
-        "zendframework/zend-config-aggregator": "self.version"
+        "zendframework/zend-config-aggregator": "^1.2.0"
     }
 }
