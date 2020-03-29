@@ -24,7 +24,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - Nothing.
 
-## 1.2.2 - TBD
+## 1.2.2 - 2020-03-29
 
 ### Added
 
@@ -44,7 +44,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- Fixed `replace` version constraint in composer.json so repository can be used as replacement of `zendframework/zend-config-aggregator:^1.2.0`.
 
 ## 1.2.1 - 2020-03-21
 
