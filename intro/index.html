@@ -293,7 +293,7 @@ arrays, or INI/YAML/XML files (using <a href="https://docs.laminas.dev/laminas-c
 handling like <a href="https://symfony.com/doc/current/service_container/parameters.html#parameters-in-configuration-files">symfony/dependency-injection</a></p>
 <h2 id="basic-usage">Basic usage</h2>
 <p>The standalone <code>ConfigAggregator</code> can be used to merge PHP-based configuration files:</p>
-<pre class=codehilite><code class=language-php>use Laminas\ConfigAggregator\ConfigAggregator;
+<pre class="highlight"><code class="language-php">use Laminas\ConfigAggregator\ConfigAggregator;
 use Laminas\ConfigAggregator\PhpFileProvider;
 
 $aggregator = new ConfigAggregator([
@@ -301,8 +301,9 @@ $aggregator = new ConfigAggregator([
 ]);
 
 var_dump($aggregator-&gt;getMergedConfig());</code></pre>
+
 <p>Using this provider, each file should return a PHP array:</p>
-<pre class=codehilite><code class=language-php>// db.global.php
+<pre class="highlight"><code class="language-php">// db.global.php
 return [
     'db' =&gt; [
         'dsn' =&gt; 'mysql:...',
@@ -314,29 +315,32 @@ return [
     'cache_storage' =&gt; 'redis',
     'redis' =&gt; [ ... ],
 ];</code></pre>
+
 <p>Result:</p>
-<pre class=codehilite><code class=language-php>array(3) {
+<pre class="highlight"><code class="language-php">array(3) {
   'db' =&gt;
   array(1) {
     'dsn' =&gt;
-    string(9) &quot;mysql:...&quot;
+    string(9) "mysql:..."
   }
   'cache_storage' =&gt;
-  string(5) &quot;redis&quot;
+  string(5) "redis"
   'redis' =&gt;
   array(0) {
      ...
   }
 }</code></pre>
+
 <p>Configuration is merged in the same order as it is passed, with later entries having precedence.</p>
 <p>Together with <code>laminas-config</code>, <code>laminas-config-aggregator</code> can be also used to load
 configuration in different formats, including YAML, JSON, XML, or INI:</p>
-<pre class=codehilite><code class=language-php>use Laminas\ConfigAggregator\ConfigAggregator;
+<pre class="highlight"><code class="language-php">use Laminas\ConfigAggregator\ConfigAggregator;
 use Laminas\ConfigAggregator\LaminasConfigProvider;
 
 $aggregator = new ConfigAggregator([
     new LaminasConfigProvider('config/*.{json,yaml,php}'),
 ]);</code></pre>
+
 <p>You can also supply <a href="../config-post-processors/">post processors</a> for
 configuration. These are PHP callables that accept the merged configuration as
 an argument, do something with it, and return configuration on completion. This

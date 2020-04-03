@@ -278,7 +278,7 @@ using many configuration files. As such, laminas-config-aggregator also
 provides the ability to enable a filesystem-based configuration cache.</p>
 <p>To enable the configuration cache, pass a cache file name as the second
 parameter to the <code>ConfigAggregator</code> constructor:</p>
-<pre class=codehilite><code class=language-php>use Laminas\ConfigAggregator\ArrayProvider;
+<pre class="highlight"><code class="language-php">use Laminas\ConfigAggregator\ArrayProvider;
 use Laminas\ConfigAggregator\ConfigAggregator;
 use Laminas\ConfigAggregator\PhpFileProvider;
 
@@ -289,6 +289,7 @@ $aggregator = new ConfigAggregator(
     ],
     'data/config-cache.php'
 );</code></pre>
+
 <p>When a cache file is specified, you will also need to add the
 <code>config_cache_enabled</code> key (which you can also specify via the
 <code>ConfigAggregator::ENABLE_CACHE</code> constant) somewhere within one of your
@@ -297,12 +298,13 @@ you were to use the globbing pattern <code>{{,*.}global,{,*.}local}.php</code> (
 with the <code>PhpFileProvider</code>, you could drop a file named <code>enable-cache.local.php</code>
 into your production deployment with the following contents in order to enable
 configuration caching in production:</p>
-<pre class=codehilite><code class=language-php>&lt;?php
+<pre class="highlight"><code class="language-php">&lt;?php
 use Laminas\ConfigAggregator\ConfigAggregator;
 
 return [
     ConfigAggregator::ENABLE_CACHE =&gt; true,
 ];</code></pre>
+
 <p>When caching is enabled, the <code>ConfigAggregator</code> does not iterate config
 providers. Because of that it is very fast, but after it is enabled, you cannot
 make any changes to configuration without clearing the cache. <strong>Caching should
@@ -312,7 +314,7 @@ clear the cache.</p>
 the <a href="http://php.net/manual/en/function.chmod.php">file mode</a> in the
 <code>ConfigAggregator::CACHE_FILEMODE</code> configuration. Use this if your config
 contains sensitive information such as database passwords:</p>
-<pre class=codehilite><code class=language-php>use Laminas\ConfigAggregator\ArrayProvider;
+<pre class="highlight"><code class="language-php">use Laminas\ConfigAggregator\ArrayProvider;
 use Laminas\ConfigAggregator\ConfigAggregator;
 use Laminas\ConfigAggregator\PhpFileProvider;
 
@@ -326,6 +328,7 @@ $aggregator = new ConfigAggregator(
     ],
     'data/config-cache.php'
 );</code></pre>
+
 <p>Note that mode is an octal value. To ensure the expected operation, you need
 to prefix the file mode with a zero (e.g. <code>0644</code>).</p>
 
