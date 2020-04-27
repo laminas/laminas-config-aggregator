@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
      <loc>https://docs.laminas.dev/laminas-config-aggregator/</loc>
-     <lastmod>2020-04-15</lastmod>
+     <lastmod>2020-04-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://docs.laminas.dev/laminas-config-aggregator/intro/</loc>
-     <lastmod>2020-04-15</lastmod>
+     <lastmod>2020-04-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://docs.laminas.dev/laminas-config-aggregator/config-providers/</loc>
-     <lastmod>2020-04-15</lastmod>
+     <lastmod>2020-04-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://docs.laminas.dev/laminas-config-aggregator/config-post-processors/</loc>
-     <lastmod>2020-04-15</lastmod>
+     <lastmod>2020-04-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://docs.laminas.dev/laminas-config-aggregator/caching/</loc>
-     <lastmod>2020-04-15</lastmod>
+     <lastmod>2020-04-27</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
