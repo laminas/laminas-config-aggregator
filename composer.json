@@ -40,7 +40,8 @@
     "suggest": {
         "laminas/laminas-config": "Allows loading configuration from XML, INI, YAML, and JSON files",
         "laminas/laminas-config-aggregator-modulemanager": "Allows loading configuration from laminas-mvc Module classes",
-        "laminas/laminas-config-aggregator-parameters": "Allows usage of templated parameters within your configuration"
+        "laminas/laminas-config-aggregator-parameters": "Allows usage of templated parameters within your configuration",
+        "brick/varexporter": "Allows usage of closures in cached config"
     },
     "autoload": {
         "psr-4": {

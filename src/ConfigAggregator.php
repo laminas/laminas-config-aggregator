@@ -8,6 +8,8 @@
 
 namespace Laminas\ConfigAggregator;
 
+use Brick\VarExporter\ExportException;
+use Brick\VarExporter\VarExporter;
 use Closure;
 use Generator;
 use Laminas\Stdlib\ArrayUtils\MergeRemoveKey;
@@ -263,6 +265,7 @@ EOT;
      *
      * @param array $config
      * @param null|string $cachedConfigFile
+     * @throws ConfigCannotBeCachedException
      */
     private function cacheConfig(array $config, $cachedConfigFile)
     {
@@ -274,12 +277,18 @@ EOT;
             return;
         }
 
-        $contents = sprintf(
-            self::CACHE_TEMPLATE,
-            get_class($this),
-            date('c'),
-            var_export($config, true)
-        );
+        $hasVarExporter = is_callable("Brick\VarExporter\VarExporter::export");
+
+        try {
+            $contents = sprintf(
+                self::CACHE_TEMPLATE,
+                get_class($this),
+                date('c'),
+                $hasVarExporter ? VarExporter::export($config) : var_export($config, true)
+            );
+        } catch (ExportException $e) {
+            throw ConfigCannotBeCachedException::fromExporterException($e);
+        }
 
         $mode = isset($config[self::CACHE_FILEMODE]) ? $config[self::CACHE_FILEMODE] : null;
         $this->writeCache($cachedConfigFile, $contents, $mode);

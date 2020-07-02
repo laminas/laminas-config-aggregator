@@ -9,6 +9,7 @@
 namespace LaminasTest\ConfigAggregator;
 
 use Laminas\ConfigAggregator\ConfigAggregator;
+use Laminas\ConfigAggregator\ConfigCannotBeCachedException;
 use Laminas\ConfigAggregator\InvalidConfigProcessorException;
 use Laminas\ConfigAggregator\InvalidConfigProviderException;
 use LaminasTest\ConfigAggregator\Resources\BarConfigProvider;
@@ -23,7 +24,6 @@ use function var_export;
 class ConfigAggregatorTest extends TestCase
 {
     private $cacheFile;
-    private $lockFile;
 
     protected function setUp()
     {
@@ -41,13 +41,13 @@ class ConfigAggregatorTest extends TestCase
         @rmdir(dirname($this->cacheFile));
     }
 
-    public function testConfigAggregatorRisesExceptionIfProviderClassDoesNotExist()
+    public function testConfigAggregatorRaisesExceptionIfProviderClassDoesNotExist()
     {
         $this->expectException(InvalidConfigProviderException::class);
         new ConfigAggregator(['NonExistentConfigProvider']);
     }
 
-    public function testConfigAggregatorRisesExceptionIfProviderIsNotCallable()
+    public function testConfigAggregatorRaisesExceptionIfProviderIsNotCallable()
     {
         $this->expectException(InvalidConfigProviderException::class);
         new ConfigAggregator([stdClass::class]);
@@ -92,8 +92,59 @@ class ConfigAggregatorTest extends TestCase
         ], $this->cacheFile);
         $this->assertTrue(file_exists($this->cacheFile));
         $cachedConfig = include $this->cacheFile;
+
         $this->assertInternalType('array', $cachedConfig);
         $this->assertEquals(['foo' => 'bar', ConfigAggregator::ENABLE_CACHE => true], $cachedConfig);
+    }
+
+    public function testConfigAggregatorCanCacheConfigWithClosures()
+    {
+        if (! is_callable("Brick\VarExporter\VarExporter::export")) {
+            $this->markTestSkipped(
+                'Brick\VarExporter is not available.'
+            );
+        }
+
+        new ConfigAggregator([
+                function () {
+                    return [
+                     'toUpper' => function ($input) {
+                        return strtoupper($input);
+                     },
+                     ConfigAggregator::ENABLE_CACHE => true
+                    ];
+                }
+         ], $this->cacheFile);
+        $this->assertTrue(file_exists($this->cacheFile));
+
+        $cachedConfig = include $this->cacheFile;
+
+        $this->assertTrue(is_callable($cachedConfig['toUpper']));
+        $this->assertEquals('FOOBAR', call_user_func($cachedConfig['toUpper'], 'foobar'));
+    }
+
+    public function testConfigAggregatorRaisesExceptionIfConfigCannotBeExported()
+    {
+        if (! is_callable("Brick\VarExporter\VarExporter::export")) {
+            $this->markTestSkipped(
+                'Brick\VarExporter is not available.'
+            );
+        }
+
+        $this->expectException(ConfigCannotBeCachedException::class);
+
+        $prefix = 'prefix';
+        $functionWithUse = function ($input) use ($prefix) {
+            return $prefix . $input;
+        };
+        new ConfigAggregator([
+                function () use ($functionWithUse) {
+                    return [
+                     'toUpper' => $functionWithUse,
+                     ConfigAggregator::ENABLE_CACHE => true
+                    ];
+                }
+         ], $this->cacheFile);
     }
 
     public function testConfigAggregatorSetsDefaultModeOnCache()
@@ -148,13 +199,13 @@ class ConfigAggregatorTest extends TestCase
         $this->assertEquals($expected, $mergedConfig);
     }
 
-    public function testConfigAggregatorRisesExceptionIfProcessorClassDoesNotExist()
+    public function testConfigAggregatorRaisesExceptionIfProcessorClassDoesNotExist()
     {
         $this->expectException(InvalidConfigProcessorException::class);
         new ConfigAggregator([], null, ['NonExistentConfigProcessor']);
     }
 
-    public function testConfigAggregatorRisesExceptionIfProcessorIsNotCallable()
+    public function testConfigAggregatorRaisesExceptionIfProcessorIsNotCallable()
     {
         $this->expectException(InvalidConfigProcessorException::class);
         new ConfigAggregator([], null, [stdClass::class]);
