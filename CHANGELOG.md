@@ -2,11 +2,11 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 1.3.0 - TBD
+## 1.3.0 - 2020-07-08
 
 ### Added
 
-- Nothing.
+- [#7](https://github.com/laminas/laminas-config-aggregator/pull/7) adds support for caching closures when caching configuration.
 
 ### Changed
 
@@ -18,29 +18,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-## 1.2.3 - TBD
-
-### Added
-
-- Nothing.
-
-### Changed
-
-- Nothing.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
+- [#7](https://github.com/laminas/laminas-config-aggregator/pull/7) removes support for PHP versions prior to 7.2.
 
 ### Fixed
 
