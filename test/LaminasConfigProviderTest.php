@@ -13,18 +13,18 @@ use PHPUnit\Framework\TestCase;
 
 class LaminasConfigProviderTest extends TestCase
 {
-    public function testProviderLoadsConfigFromFiles()
+    public function testProviderLoadsConfigFromFiles(): void
     {
         $provider = new LaminasConfigProvider(__DIR__ . '/Resources/laminas-config/config.*');
         $config = $provider();
-        $this->assertEquals(
+        $this->assertSame(
             [
                 'database' => [
-                    'adapter' => 'pdo',
                     'host' => 'db.example.com',
                     'database' => 'dbproduction',
                     'user' => 'dbuser',
                     'password' => 'secret',
+                    'adapter' => 'pdo',
                 ],
             ],
             $config

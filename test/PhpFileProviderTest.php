@@ -14,13 +14,13 @@ use PHPUnit\Framework\TestCase;
 
 class PhpFileProviderTest extends TestCase
 {
-    public function testProviderLoadsConfigFromFiles()
+    public function testProviderLoadsConfigFromFiles(): void
     {
         $provider = new PhpFileProvider(__DIR__ . '/Resources/config/{{,*.}global,{,*.}local}.php');
         $merged = [];
         foreach ($provider() as $item) {
             $merged = ArrayUtils::merge($merged, $item);
         }
-        $this->assertEquals(['fruit' => 'banana', 'vegetable' => 'potato'], $merged);
+        $this->assertSame(['fruit' => 'banana', 'vegetable' => 'potato'], $merged);
     }
 }
