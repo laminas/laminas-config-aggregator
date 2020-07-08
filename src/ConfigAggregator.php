@@ -35,11 +35,14 @@ use function sprintf;
  */
 class ConfigAggregator
 {
-    const ENABLE_CACHE = 'config_cache_enabled';
+    public const ENABLE_CACHE = 'config_cache_enabled';
 
-    const CACHE_FILEMODE = 'config_cache_filemode';
+    public const CACHE_FILEMODE = 'config_cache_filemode';
 
-    const CACHE_TEMPLATE = <<< 'EOT'
+    /**
+     * @todo Make this constant private in version 2.0.0
+     */
+    public const CACHE_TEMPLATE = <<< 'EOT'
 <?php
 
 /**
