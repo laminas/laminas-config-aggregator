@@ -162,7 +162,7 @@ EOT;
      *
      * @return $a
      */
-    private function mergeArray(array $a, array $b)
+    private function mergeArray(array $a, array $b): array
     {
         foreach ($b as $key => $value) {
             if ($value instanceof MergeReplaceKeyInterface) {
@@ -197,7 +197,7 @@ EOT;
      * @return void
      * @throws InvalidConfigProviderException
      */
-    private function mergeConfig(&$mergedConfig, $config, callable $provider)
+    private function mergeConfig(&$mergedConfig, $config, callable $provider): void
     {
         if (! is_array($config)) {
             $type = $this->detectVariableType($provider);
@@ -217,7 +217,7 @@ EOT;
      * @param array $providers
      * @return array
      */
-    private function loadConfigFromProviders(array $providers)
+    private function loadConfigFromProviders(array $providers): array
     {
         $mergedConfig = [];
         foreach ($providers as $provider) {
@@ -242,7 +242,7 @@ EOT;
      * @param null|string $cachedConfigFile
      * @return bool
      */
-    private function loadConfigFromCache($cachedConfigFile)
+    private function loadConfigFromCache($cachedConfigFile): bool
     {
         if (null === $cachedConfigFile) {
             return false;
@@ -263,7 +263,7 @@ EOT;
      * @param null|string $cachedConfigFile
      * @throws ConfigCannotBeCachedException
      */
-    private function cacheConfig(array $config, $cachedConfigFile)
+    private function cacheConfig(array $config, $cachedConfigFile): void
     {
         if (null === $cachedConfigFile) {
             return;
@@ -284,14 +284,14 @@ EOT;
             throw ConfigCannotBeCachedException::fromExporterException($e);
         }
 
-        $mode = isset($config[self::CACHE_FILEMODE]) ? $config[self::CACHE_FILEMODE] : null;
+        $mode = $config[self::CACHE_FILEMODE] ?? null;
         $this->writeCache($cachedConfigFile, $contents, $mode);
     }
 
     /**
      * @return array
      */
-    private function postProcessConfig(array $processors, array $config)
+    private function postProcessConfig(array $processors, array $config): array
     {
         foreach ($processors as $processor) {
             $processor = $this->resolveProcessor($processor);
@@ -306,7 +306,7 @@ EOT;
      *
      * @return string
      */
-    private function detectVariableType($variable)
+    private function detectVariableType($variable): string
     {
         if ($variable instanceof Closure) {
             return 'Closure';
@@ -330,7 +330,7 @@ EOT;
      * @param null|string $contents
      * @param null|int $mode
      */
-    private function writeCache($cachedConfigFile, $contents, $mode)
+    private function writeCache($cachedConfigFile, $contents, $mode): void
     {
         try {
             if ($mode !== null) {

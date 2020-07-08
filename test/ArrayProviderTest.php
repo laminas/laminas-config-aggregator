@@ -13,13 +13,13 @@ use PHPUnit\Framework\TestCase;
 
 class ArrayProviderTest extends TestCase
 {
-    public function testProviderIsCallable()
+    public function testProviderIsCallable(): void
     {
         $provider = new ArrayProvider([]);
         $this->assertIsCallable($provider);
     }
 
-    public function testProviderReturnsArrayProvidedAtConstruction()
+    public function testProviderReturnsArrayProvidedAtConstruction(): void
     {
         $expected = [
             'foo' => 'bar',

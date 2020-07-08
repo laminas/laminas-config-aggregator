@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 
 class PhpFileProviderTest extends TestCase
 {
-    public function testProviderLoadsConfigFromFiles()
+    public function testProviderLoadsConfigFromFiles(): void
     {
         $provider = new PhpFileProvider(__DIR__ . '/Resources/config/{{,*.}global,{,*.}local}.php');
         $merged = [];
