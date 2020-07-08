@@ -21,6 +21,6 @@ class PhpFileProviderTest extends TestCase
         foreach ($provider() as $item) {
             $merged = ArrayUtils::merge($merged, $item);
         }
-        $this->assertEquals(['fruit' => 'banana', 'vegetable' => 'potato'], $merged);
+        $this->assertSame(['fruit' => 'banana', 'vegetable' => 'potato'], $merged);
     }
 }

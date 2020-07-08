@@ -16,7 +16,7 @@ class ArrayProviderTest extends TestCase
     public function testProviderIsCallable()
     {
         $provider = new ArrayProvider([]);
-        $this->assertInternalType('callable', $provider);
+        $this->assertIsCallable($provider);
     }
 
     public function testProviderReturnsArrayProvidedAtConstruction()
