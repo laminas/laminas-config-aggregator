@@ -101,10 +101,10 @@ class ConfigAggregatorTest extends TestCase
         new ConfigAggregator([
                 function () {
                     return [
-                     'toUpper' => function ($input) {
-                        return strtoupper($input);
-                     },
-                     ConfigAggregator::ENABLE_CACHE => true
+                        'toUpper' => function ($input) {
+                            return strtoupper($input);
+                        },
+                        ConfigAggregator::ENABLE_CACHE => true,
                     ];
                 }
          ], $this->cacheFile);
@@ -126,8 +126,8 @@ class ConfigAggregatorTest extends TestCase
         new ConfigAggregator([
             function () use ($functionWithUse) {
                 return [
-                 'addPrefix' => $functionWithUse,
-                 ConfigAggregator::ENABLE_CACHE => true
+                    'addPrefix' => $functionWithUse,
+                    ConfigAggregator::ENABLE_CACHE => true,
                 ];
             }
          ], $this->cacheFile);
@@ -148,7 +148,7 @@ class ConfigAggregatorTest extends TestCase
             function () {
                 return [
                     'file_handle' => fopen('php://memory', 'rb+'),
-                     ConfigAggregator::ENABLE_CACHE => true
+                     ConfigAggregator::ENABLE_CACHE => true,
                 ];
             }
          ], $this->cacheFile);
@@ -171,7 +171,7 @@ class ConfigAggregatorTest extends TestCase
                 return [
                     'foo' => 'bar',
                     ConfigAggregator::ENABLE_CACHE => true,
-                    ConfigAggregator::CACHE_FILEMODE => 0600
+                    ConfigAggregator::CACHE_FILEMODE => 0600,
                 ];
             }
         ], $this->cacheFile);
