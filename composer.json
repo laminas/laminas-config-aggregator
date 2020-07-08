@@ -26,6 +26,7 @@
     },
     "require": {
         "php": "^7.2",
+        "brick/varexporter": "^0.3.2",
         "laminas/laminas-stdlib": "^2.7.7 || ^3.1.0",
         "laminas/laminas-zendframework-bridge": "^1.0",
         "webimpress/safe-writer": "^1.0.2 || ^2.0.1"
@@ -40,8 +41,7 @@
     "suggest": {
         "laminas/laminas-config": "Allows loading configuration from XML, INI, YAML, and JSON files",
         "laminas/laminas-config-aggregator-modulemanager": "Allows loading configuration from laminas-mvc Module classes",
-        "laminas/laminas-config-aggregator-parameters": "Allows usage of templated parameters within your configuration",
-        "brick/varexporter": "Allows usage of closures in cached config"
+        "laminas/laminas-config-aggregator-parameters": "Allows usage of templated parameters within your configuration"
     },
     "autoload": {
         "psr-4": {

@@ -99,12 +99,6 @@ class ConfigAggregatorTest extends TestCase
 
     public function testConfigAggregatorCanCacheConfigWithClosures()
     {
-        if (! is_callable("Brick\VarExporter\VarExporter::export")) {
-            $this->markTestSkipped(
-                'Brick\VarExporter is not available.'
-            );
-        }
-
         new ConfigAggregator([
                 function () {
                     return [
@@ -125,12 +119,6 @@ class ConfigAggregatorTest extends TestCase
 
     public function testConfigAggregatorRaisesExceptionIfConfigCannotBeExported()
     {
-        if (! is_callable("Brick\VarExporter\VarExporter::export")) {
-            $this->markTestSkipped(
-                'Brick\VarExporter is not available.'
-            );
-        }
-
         $this->expectException(ConfigCannotBeCachedException::class);
 
         $prefix = 'prefix';
