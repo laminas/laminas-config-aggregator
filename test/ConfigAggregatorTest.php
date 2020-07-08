@@ -109,6 +109,7 @@ class ConfigAggregatorTest extends TestCase
                     ];
                 }
          ], $this->cacheFile);
+
         $this->assertTrue(file_exists($this->cacheFile));
 
         $cachedConfig = include $this->cacheFile;
@@ -117,21 +118,40 @@ class ConfigAggregatorTest extends TestCase
         $this->assertEquals('FOOBAR', call_user_func($cachedConfig['toUpper'], 'foobar'));
     }
 
-    public function testConfigAggregatorRaisesExceptionIfConfigCannotBeExported()
+    public function testConfigAggregatorCanCacheConfigWithClosuresWithUse()
     {
-        $this->expectException(ConfigCannotBeCachedException::class);
-
         $prefix = 'prefix';
         $functionWithUse = function ($input) use ($prefix) {
             return $prefix . $input;
         };
         new ConfigAggregator([
-                function () use ($functionWithUse) {
-                    return [
-                     'toUpper' => $functionWithUse,
+            function () use ($functionWithUse) {
+                return [
+                 'addPrefix' => $functionWithUse,
+                 ConfigAggregator::ENABLE_CACHE => true
+                ];
+            }
+         ], $this->cacheFile);
+
+        $this->assertTrue(file_exists($this->cacheFile));
+
+        $cachedConfig = include $this->cacheFile;
+
+        $this->assertTrue(is_callable($cachedConfig['addPrefix']));
+        $this->assertEquals('prefixfoobar', call_user_func($cachedConfig['addPrefix'], 'foobar'));
+    }
+
+    public function testConfigAggregatorRaisesExceptionIfConfigCannotBeExported()
+    {
+        $this->expectException(ConfigCannotBeCachedException::class);
+
+        new ConfigAggregator([
+            function () {
+                return [
+                    'file_handle' => fopen('php://memory', 'rb+'),
                      ConfigAggregator::ENABLE_CACHE => true
-                    ];
-                }
+                ];
+            }
          ], $this->cacheFile);
     }
 

@@ -278,7 +278,7 @@ EOT;
                 self::CACHE_TEMPLATE,
                 get_class($this),
                 date('c'),
-                VarExporter::export($config, VarExporter::ADD_RETURN)
+                VarExporter::export($config, VarExporter::ADD_RETURN | VarExporter::CLOSURE_SNAPSHOT_USES)
             );
         } catch (ExportException $e) {
             throw ConfigCannotBeCachedException::fromExporterException($e);
