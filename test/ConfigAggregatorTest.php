@@ -56,7 +56,7 @@ class ConfigAggregatorTest extends TestCase
     {
         $aggregator = new ConfigAggregator([FooConfigProvider::class, BarConfigProvider::class]);
         $config = $aggregator->getMergedConfig();
-        $this->assertSame(['foo' => 'bar', 'bar' => 'bat'], $config);
+        self::assertSame(['foo' => 'bar', 'bar' => 'bat'], $config);
     }
 
     public function testProviderCanBeClosure(): void
@@ -67,7 +67,7 @@ class ConfigAggregatorTest extends TestCase
             },
         ]);
         $config = $aggregator->getMergedConfig();
-        $this->assertSame(['foo' => 'bar'], $config);
+        self::assertSame(['foo' => 'bar'], $config);
     }
 
     public function testProviderCanBeGenerator(): void
@@ -79,7 +79,7 @@ class ConfigAggregatorTest extends TestCase
             },
         ]);
         $config = $aggregator->getMergedConfig();
-        $this->assertSame(['foo' => 'bar', 'baz' => 'bat'], $config);
+        self::assertSame(['foo' => 'bar', 'baz' => 'bat'], $config);
     }
 
     public function testConfigAggregatorCanCacheConfig(): void
@@ -89,11 +89,11 @@ class ConfigAggregatorTest extends TestCase
                 return ['foo' => 'bar', ConfigAggregator::ENABLE_CACHE => true];
             }
         ], $this->cacheFile);
-        $this->assertFileExists($this->cacheFile);
+        self::assertFileExists($this->cacheFile);
         $cachedConfig = include $this->cacheFile;
 
-        $this->assertIsArray($cachedConfig);
-        $this->assertSame(['foo' => 'bar', ConfigAggregator::ENABLE_CACHE => true], $cachedConfig);
+        self::assertIsArray($cachedConfig);
+        self::assertSame(['foo' => 'bar', ConfigAggregator::ENABLE_CACHE => true], $cachedConfig);
     }
 
     public function testConfigAggregatorCanCacheConfigWithClosures(): void
@@ -109,12 +109,12 @@ class ConfigAggregatorTest extends TestCase
                 }
          ], $this->cacheFile);
 
-        $this->assertFileExists($this->cacheFile);
+        self::assertFileExists($this->cacheFile);
 
         $cachedConfig = include $this->cacheFile;
 
-        $this->assertIsCallable($cachedConfig['toUpper']);
-        $this->assertSame('FOOBAR', $cachedConfig['toUpper']('foobar'));
+        self::assertIsCallable($cachedConfig['toUpper']);
+        self::assertSame('FOOBAR', $cachedConfig['toUpper']('foobar'));
     }
 
     public function testConfigAggregatorCanCacheConfigWithClosuresWithUse(): void
@@ -132,12 +132,12 @@ class ConfigAggregatorTest extends TestCase
             }
          ], $this->cacheFile);
 
-        $this->assertFileExists($this->cacheFile);
+        self::assertFileExists($this->cacheFile);
 
         $cachedConfig = include $this->cacheFile;
 
-        $this->assertIsCallable($cachedConfig['addPrefix']);
-        $this->assertSame('prefixfoobar', $cachedConfig['addPrefix']('foobar'));
+        self::assertIsCallable($cachedConfig['addPrefix']);
+        self::assertSame('prefixfoobar', $cachedConfig['addPrefix']('foobar'));
     }
 
     public function testConfigAggregatorRaisesExceptionIfConfigCannotBeExported(): void
@@ -161,7 +161,7 @@ class ConfigAggregatorTest extends TestCase
                 return ['foo' => 'bar', ConfigAggregator::ENABLE_CACHE => true];
             }
         ], $this->cacheFile);
-        $this->assertSame(0666 & ~umask(), fileperms($this->cacheFile) & 0777);
+        self::assertSame(0666 & ~umask(), fileperms($this->cacheFile) & 0777);
     }
 
     public function testConfigAggregatorSetsModeOnCache(): void
@@ -175,7 +175,7 @@ class ConfigAggregatorTest extends TestCase
                 ];
             }
         ], $this->cacheFile);
-        $this->assertSame(0600, fileperms($this->cacheFile) & 0777);
+        self::assertSame(0600, fileperms($this->cacheFile) & 0777);
     }
 
     public function testConfigAggregatorSetsHandlesUnwritableCache(): void
@@ -187,7 +187,7 @@ class ConfigAggregatorTest extends TestCase
             }
         ], $this->cacheFile);
 
-        $this->assertFileNotExists($this->cacheFile);
+        self::assertFileDoesNotExist($this->cacheFile);
     }
 
     public function testConfigAggregatorCanLoadConfigFromCache(): void
@@ -202,8 +202,8 @@ class ConfigAggregatorTest extends TestCase
         $aggregator = new ConfigAggregator([], $this->cacheFile);
         $mergedConfig = $aggregator->getMergedConfig();
 
-        $this->assertIsArray($mergedConfig);
-        $this->assertSame($expected, $mergedConfig);
+        self::assertIsArray($mergedConfig);
+        self::assertSame($expected, $mergedConfig);
     }
 
     public function testConfigAggregatorRaisesExceptionIfProcessorClassDoesNotExist(): void
@@ -227,7 +227,7 @@ class ConfigAggregatorTest extends TestCase
         ]);
 
         $config = $aggregator->getMergedConfig();
-        $this->assertSame(['processor' => 'closure'], $config);
+        self::assertSame(['processor' => 'closure'], $config);
     }
 
     public function testConfigAggregatorCanPostProcessConfiguration(): void
@@ -239,6 +239,6 @@ class ConfigAggregatorTest extends TestCase
         ], null, [new FooPostProcessor]);
         $mergedConfig = $aggregator->getMergedConfig();
 
-        $this->assertSame(['foo' => 'bar', 'post-processed' => true], $mergedConfig);
+        self::assertSame(['foo' => 'bar', 'post-processed' => true], $mergedConfig);
     }
 }

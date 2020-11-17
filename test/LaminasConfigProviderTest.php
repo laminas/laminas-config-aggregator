@@ -17,7 +17,7 @@ class LaminasConfigProviderTest extends TestCase
     {
         $provider = new LaminasConfigProvider(__DIR__ . '/Resources/laminas-config/config.*');
         $config = $provider();
-        $this->assertSame(
+        self::assertSame(
             [
                 'database' => [
                     'host' => 'db.example.com',
