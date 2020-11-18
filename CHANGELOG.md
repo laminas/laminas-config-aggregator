@@ -2,27 +2,28 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 1.4.0 - TBD
+## 1.4.0 - 2020-11-18
 
 ### Added
 
 - [#10](https://github.com/laminas/laminas-config-aggregator/pull/10) Adds PHP 8.0 support
 
-### Changed
 
-- Nothing.
+-----
 
-### Deprecated
+### Release Notes for [1.4.0](https://github.com/laminas/laminas-config-aggregator/milestone/3)
 
-- Nothing.
 
-### Removed
 
-- Nothing.
+### 1.4.0
 
-### Fixed
+- Total issues resolved: **0**
+- Total pull requests resolved: **1**
+- Total contributors: **1**
 
-- Nothing.
+#### Enhancement
+
+ - [10: PHP 8.0 support](https://github.com/laminas/laminas-config-aggregator/pull/10) thanks to @arueckauer
 
 ## 1.3.0 - 2020-07-08
 
