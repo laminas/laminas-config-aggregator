@@ -21,7 +21,7 @@
     "extra": {
     },
     "require": {
-        "php": "^7.2",
+        "php": "^7.3 || ~8.0.0",
         "brick/varexporter": "^0.3.2",
         "laminas/laminas-stdlib": "^2.7.7 || ^3.1.0",
         "laminas/laminas-zendframework-bridge": "^1.0",
@@ -32,7 +32,7 @@
         "laminas/laminas-config": "^2.6 || ^3.0",
         "laminas/laminas-servicemanager": "^2.7.7 || ^3.1.1",
         "malukenho/docheader": "^0.1.5",
-        "phpunit/phpunit": "^8.5.8"
+        "phpunit/phpunit": "^9.3"
     },
     "suggest": {
         "laminas/laminas-config": "Allows loading configuration from XML, INI, YAML, and JSON files",

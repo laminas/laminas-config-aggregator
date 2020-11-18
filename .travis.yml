@@ -6,18 +6,12 @@ cache:
 
 env:
   global:
-    - COMPOSER_ARGS="--no-interaction"
+    - COMPOSER_ARGS="--no-interaction --ignore-platform-reqs"
     - COVERAGE_DEPS="php-coveralls/php-coveralls"
 
 matrix:
   fast_finish: true
   include:
-    - php: 7.2
-      env:
-        - DEPS=lowest
-    - php: 7.2
-      env:
-        - DEPS=latest
     - php: 7.3
       env:
         - DEPS=lowest
@@ -32,6 +26,12 @@ matrix:
         - DEPS=latest
         - CS_CHECK=true
         - TEST_COVERAGE=true
+    - php: nightly
+      env:
+        - DEPS=lowest
+    - php: nightly
+      env:
+        - DEPS=latest
 
 before_install:
   - if [[ $TEST_COVERAGE != 'true' ]]; then phpenv config-rm xdebug.ini || return 0 ; fi

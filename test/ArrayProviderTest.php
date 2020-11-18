@@ -16,7 +16,7 @@ class ArrayProviderTest extends TestCase
     public function testProviderIsCallable(): void
     {
         $provider = new ArrayProvider([]);
-        $this->assertIsCallable($provider);
+        self::assertIsCallable($provider);
     }
 
     public function testProviderReturnsArrayProvidedAtConstruction(): void
@@ -26,6 +26,6 @@ class ArrayProviderTest extends TestCase
         ];
         $provider = new ArrayProvider($expected);
 
-        $this->assertSame($expected, $provider());
+        self::assertSame($expected, $provider());
     }
 }
