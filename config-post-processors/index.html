@@ -216,7 +216,7 @@
             </div>
 
             
-            <div class="col-4 text-sm-right">
+            <div class="col-4 text-right">
                 
                     
 
@@ -303,7 +303,6 @@ $processors = [
 
 $aggregator = new ConfigAggregator($providers, null, $processors);
 var_dump($aggregator-&gt;getMergedConfig());</code></pre>
-
 <p>Output from the example:</p>
 <pre class="highlight"><code class="language-php">array(2) {
   'foo' =&gt;
@@ -311,7 +310,6 @@ var_dump($aggregator-&gt;getMergedConfig());</code></pre>
   'post-processed' =&gt;
   bool(true)
 }</code></pre>
-
 <p>If the processor is a class name, the aggregator automatically instantiates it
 before invoking it; as such, any class name you use as a config provider
 <strong>must</strong> also define <code>__invoke()</code>, and that method <strong>must</strong> return an array and
@@ -374,7 +372,6 @@ $aggregator = new ConfigAggregator($provider, null, [
 ]);
 
 var_dump($aggregator-&gt;getMergedConfig());</code></pre>
-
 <p>The above would result in the following when complete:</p>
 <pre class="highlight"><code class="language-php">array(2) {
   'session' =&gt;
@@ -396,7 +393,6 @@ var_dump($aggregator-&gt;getMergedConfig());</code></pre>
     string(11) "example.com"
   }
 }</code></pre>
-
 <p>There is an extension for this feature available via the package
 <a href="https://docs.laminas.dev/laminas-config-aggregator-parameters/">laminas/laminas-config-aggregator-parameters</a>:</p>
 <pre class="highlight"><code class="language-bash">$ composer require laminas/laminas-config-aggregator-parameters</code></pre>

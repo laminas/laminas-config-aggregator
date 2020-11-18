@@ -216,7 +216,7 @@
             </div>
 
             
-            <div class="col-4 text-sm-right">
+            <div class="col-4 text-right">
                 
                     
 
@@ -289,7 +289,6 @@ $aggregator = new ConfigAggregator(
     ],
     'data/config-cache.php'
 );</code></pre>
-
 <p>When a cache file is specified, you will also need to add the
 <code>config_cache_enabled</code> key (which you can also specify via the
 <code>ConfigAggregator::ENABLE_CACHE</code> constant) somewhere within one of your
@@ -304,7 +303,6 @@ use Laminas\ConfigAggregator\ConfigAggregator;
 return [
     ConfigAggregator::ENABLE_CACHE =&gt; true,
 ];</code></pre>
-
 <p>When caching is enabled, the <code>ConfigAggregator</code> does not iterate config
 providers. Because of that it is very fast, but after it is enabled, you cannot
 make any changes to configuration without clearing the cache. <strong>Caching should
@@ -328,7 +326,6 @@ $aggregator = new ConfigAggregator(
     ],
     'data/config-cache.php'
 );</code></pre>
-
 <p>Note that mode is an octal value. To ensure the expected operation, you need
 to prefix the file mode with a zero (e.g. <code>0644</code>).</p>
 

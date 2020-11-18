@@ -216,7 +216,7 @@
             </div>
 
             
-            <div class="col-4 text-sm-right">
+            <div class="col-4 text-right">
                 
                     
 
@@ -301,7 +301,6 @@ $aggregator = new ConfigAggregator([
 ]);
 
 var_dump($aggregator-&gt;getMergedConfig());</code></pre>
-
 <p>Using this provider, each file should return a PHP array:</p>
 <pre class="highlight"><code class="language-php">// db.global.php
 return [
@@ -315,7 +314,6 @@ return [
     'cache_storage' =&gt; 'redis',
     'redis' =&gt; [ ... ],
 ];</code></pre>
-
 <p>Result:</p>
 <pre class="highlight"><code class="language-php">array(3) {
   'db' =&gt;
@@ -330,7 +328,6 @@ return [
      ...
   }
 }</code></pre>
-
 <p>Configuration is merged in the same order as it is passed, with later entries having precedence.</p>
 <p>Together with <code>laminas-config</code>, <code>laminas-config-aggregator</code> can be also used to load
 configuration in different formats, including YAML, JSON, XML, or INI:</p>
@@ -340,7 +337,6 @@ use Laminas\ConfigAggregator\LaminasConfigProvider;
 $aggregator = new ConfigAggregator([
     new LaminasConfigProvider('config/*.{json,yaml,php}'),
 ]);</code></pre>
-
 <p>You can also supply <a href="../config-post-processors/">post processors</a> for
 configuration. These are PHP callables that accept the merged configuration as
 an argument, do something with it, and return configuration on completion. This
