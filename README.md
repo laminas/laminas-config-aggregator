@@ -1,7 +1,6 @@
 # laminas-config-aggregator
 
-[![Build Status](https://travis-ci.com/laminas/laminas-config-aggregator.svg?branch=master)](https://travis-ci.com/laminas/laminas-config-aggregator)
-[![Coverage Status](https://coveralls.io/repos/github/laminas/laminas-config-aggregator/badge.svg?branch=master)](https://coveralls.io/github/laminas/laminas-config-aggregator?branch=master)
+[![Build Status](https://github.com/laminas/laminas-config-aggregator/workflows/Continuous%20Integration/badge.svg)](https://github.com/laminas/laminas-config-aggregator/actions?query=workflow%3A"Continuous+Integration")
 
 Aggregates and merges configuration, from a variety of formats. Supports caching
 for fast bootstrap in production environments.

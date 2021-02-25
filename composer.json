@@ -32,7 +32,9 @@
         "laminas/laminas-config": "^2.6 || ^3.0",
         "laminas/laminas-servicemanager": "^2.7.7 || ^3.1.1",
         "malukenho/docheader": "^0.1.5",
-        "phpunit/phpunit": "^9.3"
+        "phpunit/phpunit": "^9.3",
+        "psalm/plugin-phpunit": "^0.15.1",
+        "vimeo/psalm": "^4.6"
     },
     "suggest": {
         "laminas/laminas-config": "Allows loading configuration from XML, INI, YAML, and JSON files",
@@ -57,7 +59,8 @@
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
         "test": "phpunit --colors=always",
-        "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
+        "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
+        "static-analysis": "psalm --shepherd --stats"
     },
     "replace": {
         "zendframework/zend-config-aggregator": "^1.2.0"
