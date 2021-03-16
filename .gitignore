@@ -2,7 +2,6 @@
 /.phpunit.cache
 /.psalm-cache
 /clover.xml
-/composer.lock
 /coveralls-upload.json
 /docs/html/
 /laminas-mkdoc-theme.tgz
