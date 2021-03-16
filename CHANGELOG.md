@@ -2,27 +2,26 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 1.5.0 - TBD
+## 1.5.0 - 2021-03-16
 
-### Added
 
-- Nothing.
+-----
 
-### Changed
+### Release Notes for [1.5.0](https://github.com/laminas/laminas-config-aggregator/milestone/6)
 
-- Nothing.
 
-### Deprecated
 
-- Nothing.
+### 1.5.0
 
-### Removed
+- Total issues resolved: **0**
+- Total pull requests resolved: **3**
+- Total contributors: **2**
 
-- Nothing.
+#### Enhancement
 
-### Fixed
-
-- Nothing.
+ - [13: Migrate to GitHub Actions and Initial Psalm Setup](https://github.com/laminas/laminas-config-aggregator/pull/13) thanks to @gsteel
+ - [12: Ignore platform requirements only for nightly builds](https://github.com/laminas/laminas-config-aggregator/pull/12) thanks to @arueckauer
+ - [11: Use local XML schema description file](https://github.com/laminas/laminas-config-aggregator/pull/11) thanks to @arueckauer
 
 ## 1.4.0 - 2020-11-18
 
