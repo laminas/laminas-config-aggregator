@@ -8,6 +8,7 @@
 
 namespace LaminasTest\ConfigAggregator;
 
+use Iterator;
 use Laminas\ConfigAggregator\ConfigAggregator;
 use Laminas\ConfigAggregator\ConfigCannotBeCachedException;
 use Laminas\ConfigAggregator\InvalidConfigProcessorException;
@@ -61,7 +62,17 @@ class ConfigAggregatorTest extends TestCase
 
     public function testConfigAggregatorMergesConfigFromIteratorProvider(): void
     {
-        $providers  = new \ArrayIterator([FooConfigProvider::class, BarConfigProvider::class]);
+        $providers = $this->createMock(Iterator::class);
+        $providers
+            ->expects($this->exactly(2))
+            ->method('current')
+            ->willReturnOnConsecutiveCalls(FooConfigProvider::class, BarConfigProvider::class);
+
+        $providers
+            ->expects($this->exactly(3))
+            ->method('valid')
+            ->willReturnOnConsecutiveCalls(true, true, false);
+
         $aggregator = new ConfigAggregator($providers);
         $config = $aggregator->getMergedConfig();
         self::assertSame(['foo' => 'bar', 'bar' => 'bat'], $config);
