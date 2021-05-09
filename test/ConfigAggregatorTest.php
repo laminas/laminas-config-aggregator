@@ -52,9 +52,17 @@ class ConfigAggregatorTest extends TestCase
         new ConfigAggregator([stdClass::class]);
     }
 
-    public function testConfigAggregatorMergesConfigFromProviders(): void
+    public function testConfigAggregatorMergesConfigFromArrayProviders(): void
     {
         $aggregator = new ConfigAggregator([FooConfigProvider::class, BarConfigProvider::class]);
+        $config = $aggregator->getMergedConfig();
+        self::assertSame(['foo' => 'bar', 'bar' => 'bat'], $config);
+    }
+
+    public function testConfigAggregatorMergesConfigFromIteratorProvider(): void
+    {
+        $providers  = new \ArrayIterator([FooConfigProvider::class, BarConfigProvider::class]);
+        $aggregator = new ConfigAggregator($providers);
         $config = $aggregator->getMergedConfig();
         self::assertSame(['foo' => 'bar', 'bar' => 'bat'], $config);
     }
