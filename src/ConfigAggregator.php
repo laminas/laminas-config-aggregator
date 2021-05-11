@@ -59,7 +59,7 @@ EOT;
     private $config;
 
     /**
-     * @param array $providers Array of providers. These may be callables, or
+     * @param iterable $providers Array or \Iterator of providers. These may be callables, or
      *     string values representing classes that act as providers. If the
      *     latter, they must be instantiable without constructor arguments.
      * @param null|string $cachedConfigFile Configuration cache file; config is
@@ -70,7 +70,7 @@ EOT;
      *     latter, they must be instantiable without constructor arguments.
      */
     public function __construct(
-        array $providers = [],
+        iterable $providers = [],
         $cachedConfigFile = null,
         array $postProcessors = []
     ) {
@@ -217,10 +217,10 @@ EOT;
     /**
      * Iterate providers, merging config from each with the previous.
      *
-     * @param array $providers
+     * @param iterable $providers
      * @return array
      */
-    private function loadConfigFromProviders(array $providers): array
+    private function loadConfigFromProviders(iterable $providers): array
     {
         $mergedConfig = [];
         foreach ($providers as $provider) {

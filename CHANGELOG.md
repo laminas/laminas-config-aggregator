@@ -10,7 +10,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- Nothing.
+- `Laminas\ConfigAggregator\ConfigAggregator` now accepts any iterable type for $providers constructor argument.
 
 ### Deprecated
 
