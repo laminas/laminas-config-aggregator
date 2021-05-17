@@ -1,31 +1,21 @@
 {
     "name": "laminas/laminas-config-aggregator",
     "description": "Lightweight library for collecting and merging configuration from different sources",
-    "license": "BSD-3-Clause",
     "keywords": [
         "laminas",
         "config-aggregator"
     ],
     "homepage": "https://laminas.dev",
-    "support": {
-        "docs": "https://docs.laminas.dev/laminas-config-aggregator/",
-        "issues": "https://github.com/laminas/laminas-config-aggregator/issues",
-        "source": "https://github.com/laminas/laminas-config-aggregator",
-        "rss": "https://github.com/laminas/laminas-config-aggregator/releases.atom",
-        "chat": "https://laminas.dev/chat",
-        "forum": "https://discourse.laminas.dev"
-    },
-    "config": {
-        "sort-packages": true
-    },
-    "extra": {
-    },
+    "license": "BSD-3-Clause",
     "require": {
         "php": "^7.3 || ~8.0.0",
         "brick/varexporter": "^0.3.2",
         "laminas/laminas-stdlib": "^2.7.7 || ^3.1.0",
         "laminas/laminas-zendframework-bridge": "^1.0",
         "webimpress/safe-writer": "^1.0.2 || ^2.0.1"
+    },
+    "replace": {
+        "zendframework/zend-config-aggregator": "^1.2.0"
     },
     "require-dev": {
         "laminas/laminas-coding-standard": "~1.0.0",
@@ -41,6 +31,10 @@
         "laminas/laminas-config-aggregator-modulemanager": "Allows loading configuration from laminas-mvc Module classes",
         "laminas/laminas-config-aggregator-parameters": "Allows usage of templated parameters within your configuration"
     },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {},
     "autoload": {
         "psr-4": {
             "Laminas\\ConfigAggregator\\": "src/"
@@ -58,11 +52,16 @@
         ],
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
+        "static-analysis": "psalm --shepherd --stats",
         "test": "phpunit --colors=always",
-        "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
-        "static-analysis": "psalm --shepherd --stats"
+        "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },
-    "replace": {
-        "zendframework/zend-config-aggregator": "^1.2.0"
+    "support": {
+        "issues": "https://github.com/laminas/laminas-config-aggregator/issues",
+        "forum": "https://discourse.laminas.dev",
+        "chat": "https://laminas.dev/chat",
+        "source": "https://github.com/laminas/laminas-config-aggregator",
+        "docs": "https://docs.laminas.dev/laminas-config-aggregator/",
+        "rss": "https://github.com/laminas/laminas-config-aggregator/releases.atom"
     }
 }
