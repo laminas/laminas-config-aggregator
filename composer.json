@@ -18,10 +18,9 @@
     "config": {
         "sort-packages": true
     },
-    "extra": {
-    },
+    "extra": {},
     "require": {
-        "php": "^7.3 || ~8.0.0",
+        "php": "^7.3 || ~8.0.0 || ~8.1.0",
         "brick/varexporter": "^0.3.2",
         "laminas/laminas-stdlib": "^2.7.7 || ^3.1.0",
         "laminas/laminas-zendframework-bridge": "^1.0",
