@@ -2,27 +2,29 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 1.6.0 - TBD
-
-### Added
-
-- Nothing.
+## 1.6.0 - 2021-09-15
 
 ### Changed
 
 - `Laminas\ConfigAggregator\ConfigAggregator` now accepts any iterable type for $providers constructor argument.
 
-### Deprecated
 
-- Nothing.
+-----
 
-### Removed
+### Release Notes for [1.6.0](https://github.com/laminas/laminas-config-aggregator/milestone/9)
 
-- Nothing.
+Feature release (minor)
 
-### Fixed
+### 1.6.0
 
-- Nothing.
+- Total issues resolved: **0**
+- Total pull requests resolved: **2**
+- Total contributors: **2**
+
+#### Enhancement
+
+ - [17: PHP 8.1 support](https://github.com/laminas/laminas-config-aggregator/pull/17) thanks to @boesing
+ - [14: Allow to pass an `iterable` of config providers to the `ConfigAggregator`](https://github.com/laminas/laminas-config-aggregator/pull/14) thanks to @ronan-gloo
 
 ## 1.5.0 - 2021-03-16
 
