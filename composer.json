@@ -18,13 +18,11 @@
     "config": {
         "sort-packages": true
     },
-    "extra": {
-    },
+    "extra": {},
     "require": {
-        "php": "^7.3 || ~8.0.0",
+        "php": "^7.3 || ~8.0.0 || ~8.1.0",
         "brick/varexporter": "^0.3.2",
         "laminas/laminas-stdlib": "^2.7.7 || ^3.1.0",
-        "laminas/laminas-zendframework-bridge": "^1.0",
         "webimpress/safe-writer": "^1.0.2 || ^2.0.1"
     },
     "require-dev": {
@@ -32,7 +30,7 @@
         "laminas/laminas-config": "^2.6 || ^3.0",
         "laminas/laminas-servicemanager": "^2.7.7 || ^3.1.1",
         "malukenho/docheader": "^0.1.5",
-        "phpunit/phpunit": "^9.3",
+        "phpunit/phpunit": "^9.5.9",
         "psalm/plugin-phpunit": "^0.15.1",
         "vimeo/psalm": "^4.6"
     },
@@ -62,7 +60,8 @@
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
         "static-analysis": "psalm --shepherd --stats"
     },
-    "replace": {
-        "zendframework/zend-config-aggregator": "^1.2.0"
+    "conflict": {
+        "zendframework/zend-config-aggregator": "*",
+        "nikic/php-parser": "<4.12"
     }
 }
