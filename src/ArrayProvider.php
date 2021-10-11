@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\ConfigAggregator;
 
 /**
@@ -9,9 +11,7 @@ namespace Laminas\ConfigAggregator;
  */
 class ArrayProvider
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private $config;
 
     /**

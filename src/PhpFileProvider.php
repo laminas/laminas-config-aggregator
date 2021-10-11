@@ -1,6 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\ConfigAggregator;
+
+use Generator;
 
 /**
  * Provide a collection of PHP files returning config arrays.
@@ -21,7 +25,7 @@ class PhpFileProvider
     }
 
     /**
-     * @return \Generator
+     * @return Generator
      */
     public function __invoke()
     {
