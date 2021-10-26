@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\ConfigAggregator;
 
 use Laminas\ConfigAggregator\LaminasConfigProvider;
@@ -10,15 +12,15 @@ class LaminasConfigProviderTest extends TestCase
     public function testProviderLoadsConfigFromFiles(): void
     {
         $provider = new LaminasConfigProvider(__DIR__ . '/Resources/laminas-config/config.*');
-        $config = $provider();
+        $config   = $provider();
         self::assertSame(
             [
                 'database' => [
-                    'host' => 'db.example.com',
+                    'host'     => 'db.example.com',
                     'database' => 'dbproduction',
-                    'user' => 'dbuser',
+                    'user'     => 'dbuser',
                     'password' => 'secret',
-                    'adapter' => 'pdo',
+                    'adapter'  => 'pdo',
                 ],
             ],
             $config

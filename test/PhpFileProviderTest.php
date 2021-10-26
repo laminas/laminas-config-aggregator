@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\ConfigAggregator;
 
 use Laminas\ConfigAggregator\PhpFileProvider;
@@ -11,7 +13,7 @@ class PhpFileProviderTest extends TestCase
     public function testProviderLoadsConfigFromFiles(): void
     {
         $provider = new PhpFileProvider(__DIR__ . '/Resources/config/{{,*.}global,{,*.}local}.php');
-        $merged = [];
+        $merged   = [];
         foreach ($provider() as $item) {
             $merged = ArrayUtils::merge($merged, $item);
         }

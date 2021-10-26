@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\ConfigAggregator;
 
 use RuntimeException;
@@ -8,10 +10,8 @@ use function sprintf;
 
 class InvalidConfigProcessorException extends RuntimeException
 {
-
     /**
      * @param string $processor
-     *
      * @return InvalidConfigProcessorException
      */
     public static function fromNamedProcessor($processor)
@@ -24,7 +24,6 @@ class InvalidConfigProcessorException extends RuntimeException
 
     /**
      * @param string $type
-     *
      * @return InvalidConfigProcessorException
      */
     public static function fromUnsupportedType($type)

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\ConfigAggregator;
 
 use Brick\VarExporter\ExportException;
@@ -10,8 +12,6 @@ use function sprintf;
 class ConfigCannotBeCachedException extends RuntimeException
 {
     /**
-     * @param ExportException $exportException
-     *
      * @return ConfigCannotBeCachedException
      */
     public static function fromExporterException(ExportException $exportException)
