@@ -2,27 +2,28 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 1.7.0 - TBD
+## 1.7.0 - 2021-10-26
 
-### Added
 
-- Nothing.
+-----
 
-### Changed
+### Release Notes for [1.7.0](https://github.com/laminas/laminas-config-aggregator/milestone/11)
 
-- Nothing.
+Feature release (minor)
 
-### Deprecated
+### 1.7.0
 
-- Nothing.
+- Total issues resolved: **0**
+- Total pull requests resolved: **2**
+- Total contributors: **1**
 
-### Removed
+#### Enhancement,hacktoberfest-accepted
 
-- Nothing.
+ - [19: Upgrade laminas-coding-standard to 2.3](https://github.com/laminas/laminas-config-aggregator/pull/19) thanks to @arueckauer
 
-### Fixed
+#### Enhancement
 
-- Nothing.
+ - [18: Remove file headers](https://github.com/laminas/laminas-config-aggregator/pull/18) thanks to @arueckauer
 
 ## 1.6.0 - 2021-09-15
 
