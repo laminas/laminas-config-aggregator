@@ -57,7 +57,7 @@ with `%` in the value, you must escape any occurences of `%` by using another
 `%`; as examples, `%%bar` or `%%foo%%`.
 
 In the following example, we define a provider that returns a nested array of
-configuration. We then define additional parameters and pass them to a 
+configuration. We then define additional parameters and pass them to a
 Symfony DI `ParameterBag`, which we develop a closure over. This closure checks
 for parameters in the passed configuration itself, and then attempts to resolve
 all configuration values based on the parameters in the `ParameterBag`.
