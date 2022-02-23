@@ -62,7 +62,7 @@ array(4) {
 }
 ```
 
-### Generators
+## Generators
 
 Config providers can be written as generators. This way, a single callable can
 provide multiple configurations:
@@ -162,7 +162,6 @@ type based on file extension.
 Some config readers (in particular, YAML) may need additional dependencies;
 please refer to [the laminas-config manual](https://docs.laminas.dev/laminas-config/reader/)
 for more details.
-
 
 ### LaminasModuleProvider
 
