@@ -8,14 +8,17 @@ namespace Laminas\ConfigAggregator;
  * Provider that returns the array seeded to itself.
  *
  * Primary use case is configuration cache-related settings.
+ *
+ * @template TKey of array-key
+ * @template TValue
  */
 class ArrayProvider
 {
-    /** @var array */
+    /** @var array<TKey, TValue> */
     private $config;
 
     /**
-     * @param array $config
+     * @param array<TKey, TValue> $config
      */
     public function __construct(array $config)
     {
@@ -23,7 +26,7 @@ class ArrayProvider
     }
 
     /**
-     * @return array
+     * @return array<TKey, TValue>
      */
     public function __invoke()
     {
