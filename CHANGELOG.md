@@ -2,27 +2,29 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 1.8.0 - TBD
+## 1.8.0 - 2022-07-24
 
-### Added
 
-- Nothing.
+-----
 
-### Changed
+### Release Notes for [1.8.0](https://github.com/laminas/laminas-config-aggregator/milestone/13)
 
-- Nothing.
+Feature release (minor)
 
-### Deprecated
+### 1.8.0
 
-- Nothing.
+- Total issues resolved: **0**
+- Total pull requests resolved: **3**
+- Total contributors: **3**
 
-### Removed
+#### Enhancement
 
-- Nothing.
+ - [22: Drop Support for PHP 7.3](https://github.com/laminas/laminas-config-aggregator/pull/22) thanks to @gsteel
+ - [20: Prepare for Renovate with reusable workflows](https://github.com/laminas/laminas-config-aggregator/pull/20) thanks to @ghostwriter
 
-### Fixed
+#### renovate
 
-- Nothing.
+ - [21: Configure Renovate](https://github.com/laminas/laminas-config-aggregator/pull/21) thanks to @renovate[bot]
 
 ## 1.7.0 - 2021-10-26
 
