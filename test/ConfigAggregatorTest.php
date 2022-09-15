@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace LaminasTest\ConfigAggregator;
 
+use Generator;
 use Iterator;
 use IteratorAggregate;
 use Laminas\ConfigAggregator\ConfigAggregator;
@@ -32,8 +33,7 @@ use function var_export;
 
 class ConfigAggregatorTest extends TestCase
 {
-    /** @var string */
-    private $cacheFile;
+    private string $cacheFile;
 
     protected function setUp(): void
     {
@@ -116,9 +116,7 @@ class ConfigAggregatorTest extends TestCase
     public function testProviderCanBeClosure(): void
     {
         $aggregator = new ConfigAggregator([
-            function () {
-                return ['foo' => 'bar'];
-            },
+            static fn() => ['foo' => 'bar'],
         ]);
         $config     = $aggregator->getMergedConfig();
         self::assertSame(['foo' => 'bar'], $config);
@@ -127,7 +125,7 @@ class ConfigAggregatorTest extends TestCase
     public function testProviderCanBeGenerator(): void
     {
         $aggregator = new ConfigAggregator([
-            function () {
+            static function (): Generator {
                 yield ['foo' => 'bar'];
                 yield ['baz' => 'bat'];
             },
@@ -139,9 +137,7 @@ class ConfigAggregatorTest extends TestCase
     public function testConfigAggregatorCanCacheConfig(): void
     {
         new ConfigAggregator([
-            function () {
-                return ['foo' => 'bar', ConfigAggregator::ENABLE_CACHE => true];
-            },
+            static fn() => ['foo' => 'bar', ConfigAggregator::ENABLE_CACHE => true],
         ], $this->cacheFile);
         self::assertFileExists($this->cacheFile);
         $cachedConfig = include $this->cacheFile;
@@ -153,14 +149,10 @@ class ConfigAggregatorTest extends TestCase
     public function testConfigAggregatorCanCacheConfigWithClosures(): void
     {
         new ConfigAggregator([
-            function () {
-                    return [
-                        'toUpper'                      => function ($input) {
-                            return strtoupper($input);
-                        },
-                        ConfigAggregator::ENABLE_CACHE => true,
-                    ];
-            },
+            static fn() => [
+                'toUpper'                      => static fn($input) => strtoupper($input),
+                ConfigAggregator::ENABLE_CACHE => true,
+            ],
         ], $this->cacheFile);
 
         self::assertFileExists($this->cacheFile);
@@ -174,16 +166,12 @@ class ConfigAggregatorTest extends TestCase
     public function testConfigAggregatorCanCacheConfigWithClosuresWithUse(): void
     {
         $prefix          = 'prefix';
-        $functionWithUse = function ($input) use ($prefix) {
-            return $prefix . $input;
-        };
+        $functionWithUse = static fn($input) => $prefix . $input;
         new ConfigAggregator([
-            function () use ($functionWithUse) {
-                return [
-                    'addPrefix'                    => $functionWithUse,
-                    ConfigAggregator::ENABLE_CACHE => true,
-                ];
-            },
+            static fn() => [
+                'addPrefix'                    => $functionWithUse,
+                ConfigAggregator::ENABLE_CACHE => true,
+            ],
         ], $this->cacheFile);
 
         self::assertFileExists($this->cacheFile);
@@ -199,21 +187,17 @@ class ConfigAggregatorTest extends TestCase
         $this->expectException(ConfigCannotBeCachedException::class);
 
         new ConfigAggregator([
-            function () {
-                return [
-                    'file_handle'                  => fopen('php://memory', 'rb+'),
-                    ConfigAggregator::ENABLE_CACHE => true,
-                ];
-            },
+            static fn() => [
+                'file_handle'                  => fopen('php://memory', 'rb+'),
+                ConfigAggregator::ENABLE_CACHE => true,
+            ],
         ], $this->cacheFile);
     }
 
     public function testConfigAggregatorSetsDefaultModeOnCache(): void
     {
         new ConfigAggregator([
-            function () {
-                return ['foo' => 'bar', ConfigAggregator::ENABLE_CACHE => true];
-            },
+            static fn() => ['foo' => 'bar', ConfigAggregator::ENABLE_CACHE => true],
         ], $this->cacheFile);
         self::assertSame(0666 & ~umask(), fileperms($this->cacheFile) & 0777);
     }
@@ -221,13 +205,11 @@ class ConfigAggregatorTest extends TestCase
     public function testConfigAggregatorSetsModeOnCache(): void
     {
         new ConfigAggregator([
-            function () {
-                return [
-                    'foo'                            => 'bar',
-                    ConfigAggregator::ENABLE_CACHE   => true,
-                    ConfigAggregator::CACHE_FILEMODE => 0600,
-                ];
-            },
+            static fn() => [
+                'foo'                            => 'bar',
+                ConfigAggregator::ENABLE_CACHE   => true,
+                ConfigAggregator::CACHE_FILEMODE => 0600,
+            ],
         ], $this->cacheFile);
         self::assertSame(0600, fileperms($this->cacheFile) & 0777);
     }
@@ -236,9 +218,7 @@ class ConfigAggregatorTest extends TestCase
     {
         chmod(dirname($this->cacheFile), 0400);
         new ConfigAggregator([
-            function () {
-                return ['foo' => 'bar', ConfigAggregator::ENABLE_CACHE => true];
-            },
+            static fn() => ['foo' => 'bar', ConfigAggregator::ENABLE_CACHE => true],
         ], $this->cacheFile);
 
         self::assertFileDoesNotExist($this->cacheFile);
@@ -275,9 +255,7 @@ class ConfigAggregatorTest extends TestCase
     public function testProcessorCanBeClosure(): void
     {
         $aggregator = new ConfigAggregator([], null, [
-            function (array $config) {
-                return $config + ['processor' => 'closure'];
-            },
+            static fn(array $config) => $config + ['processor' => 'closure'],
         ]);
 
         $config = $aggregator->getMergedConfig();
@@ -287,9 +265,7 @@ class ConfigAggregatorTest extends TestCase
     public function testConfigAggregatorCanPostProcessConfiguration(): void
     {
         $aggregator   = new ConfigAggregator([
-            function () {
-                return ['foo' => 'bar'];
-            },
+            static fn() => ['foo' => 'bar'],
         ], null, [new FooPostProcessor()]);
         $mergedConfig = $aggregator->getMergedConfig();
 

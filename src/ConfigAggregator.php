@@ -49,8 +49,7 @@ class ConfigAggregator
 
 EOT;
 
-    /** @var array */
-    private $config;
+    private array $config;
 
     /**
      * @param iterable $providers Array or \Iterator of providers. These may be callables, or

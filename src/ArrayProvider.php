@@ -15,7 +15,7 @@ namespace Laminas\ConfigAggregator;
 class ArrayProvider
 {
     /** @var array<TKey, TValue> */
-    private $config;
+    private array $config;
 
     /**
      * @param array<TKey, TValue> $config
