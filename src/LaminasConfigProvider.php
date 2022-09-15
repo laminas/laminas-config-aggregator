@@ -14,8 +14,7 @@ class LaminasConfigProvider
 {
     use GlobTrait;
 
-    /** @var string */
-    private $pattern;
+    private string $pattern;
 
     /**
      * @param string $pattern Glob pattern.

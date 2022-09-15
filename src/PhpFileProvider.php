@@ -13,8 +13,7 @@ class PhpFileProvider
 {
     use GlobTrait;
 
-    /** @var string */
-    private $pattern;
+    private string $pattern;
 
     /**
      * @param string $pattern A glob pattern by which to look up config files.

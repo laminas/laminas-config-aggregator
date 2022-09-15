@@ -78,8 +78,8 @@
       <code>$input</code>
       <code>$input</code>
     </MissingClosureParamType>
-    <MissingClosureReturnType occurrences="1">
-      <code>function ($input) use ($prefix) {</code>
+    <MissingClosureReturnType occurrences="2">
+      <code>static fn($input)</code>
     </MissingClosureReturnType>
     <MixedArgument occurrences="1">
       <code>$input</code>
