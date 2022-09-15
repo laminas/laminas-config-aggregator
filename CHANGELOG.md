@@ -2,27 +2,24 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 1.9.0 - TBD
+## 1.9.0 - 2022-09-15
 
-### Added
 
-- Nothing.
+-----
 
-### Changed
+### Release Notes for [1.9.0](https://github.com/laminas/laminas-config-aggregator/milestone/15)
 
-- Nothing.
+Feature release (minor)
 
-### Deprecated
+### 1.9.0
 
-- Nothing.
+- Total issues resolved: **0**
+- Total pull requests resolved: **1**
+- Total contributors: **1**
 
-### Removed
+#### Enhancement
 
-- Nothing.
-
-### Fixed
-
-- Nothing.
+ - [24: Apply PHP 7.4 syntax and typed property](https://github.com/laminas/laminas-config-aggregator/pull/24) thanks to @samsonasik
 
 ## 1.8.0 - 2022-07-24
 
