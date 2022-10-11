@@ -17,7 +17,6 @@ use function array_key_exists;
 use function class_exists;
 use function date;
 use function file_exists;
-use function get_class;
 use function gettype;
 use function is_array;
 use function is_callable;
@@ -305,7 +304,7 @@ EOT;
         }
 
         if (is_object($variable)) {
-            return get_class($variable);
+            return $variable::class;
         }
 
         if (is_callable($variable)) {
