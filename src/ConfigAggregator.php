@@ -93,11 +93,10 @@ EOT;
      *
      * Raises an exception for any other condition.
      *
-     * @param string|callable $provider
      * @return callable
      * @throws InvalidConfigProviderException
      */
-    private function resolveProvider($provider)
+    private function resolveProvider(string|callable $provider)
     {
         if (is_string($provider)) {
             if (! class_exists($provider)) {
@@ -124,11 +123,10 @@ EOT;
      *
      * Raises an exception for any other condition.
      *
-     * @param string|callable $processor
      * @return callable
      * @throws InvalidConfigProcessorException
      */
-    private function resolveProcessor($processor)
+    private function resolveProcessor(string|callable $processor)
     {
         if (is_string($processor)) {
             if (! class_exists($processor)) {
@@ -207,9 +205,6 @@ EOT;
 
     /**
      * Iterate providers, merging config from each with the previous.
-     *
-     * @param iterable $providers
-     * @return array
      */
     private function loadConfigFromProviders(iterable $providers): array
     {
@@ -252,7 +247,6 @@ EOT;
     /**
      * Attempt to cache discovered configuration.
      *
-     * @param array $config
      * @param null|string $cachedConfigFile
      * @throws ConfigCannotBeCachedException
      */
@@ -281,9 +275,6 @@ EOT;
         $this->writeCache($cachedConfigFile, $contents, $mode);
     }
 
-    /**
-     * @return array
-     */
     private function postProcessConfig(array $processors, array $config): array
     {
         foreach ($processors as $processor) {
@@ -329,7 +320,7 @@ EOT;
             } else {
                 FileWriter::writeFile($cachedConfigFile, $contents);
             }
-        } catch (FileWriterException $e) {
+        } catch (FileWriterException) {
             // ignore errors writing cache file
         }
     }

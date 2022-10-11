@@ -14,15 +14,11 @@ namespace Laminas\ConfigAggregator;
  */
 class ArrayProvider
 {
-    /** @var array<TKey, TValue> */
-    private array $config;
-
     /**
      * @param array<TKey, TValue> $config
      */
-    public function __construct(array $config)
+    public function __construct(private array $config)
     {
-        $this->config = $config;
     }
 
     /**

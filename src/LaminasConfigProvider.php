@@ -14,14 +14,11 @@ class LaminasConfigProvider
 {
     use GlobTrait;
 
-    private string $pattern;
-
     /**
      * @param string $pattern Glob pattern.
      */
-    public function __construct($pattern)
+    public function __construct(private string $pattern)
     {
-        $this->pattern = $pattern;
     }
 
     /**
