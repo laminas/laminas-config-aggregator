@@ -13,14 +13,11 @@ class PhpFileProvider
 {
     use GlobTrait;
 
-    private string $pattern;
-
     /**
      * @param string $pattern A glob pattern by which to look up config files.
      */
-    public function __construct($pattern)
+    public function __construct(private string $pattern)
     {
-        $this->pattern = $pattern;
     }
 
     /**
