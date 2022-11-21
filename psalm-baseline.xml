@@ -10,33 +10,20 @@
     <MixedArrayOffset occurrences="1">
       <code>$config[static::ENABLE_CACHE]</code>
     </MixedArrayOffset>
-    <MixedAssignment occurrences="9">
+    <MixedAssignment occurrences="8">
       <code>$a[$key]</code>
       <code>$a[$key]</code>
       <code>$a[$key]</code>
       <code>$a[]</code>
       <code>$cfg</code>
-      <code>$config</code>
       <code>$mode</code>
       <code>$this-&gt;config</code>
       <code>$value</code>
     </MixedAssignment>
-    <MixedInferredReturnType occurrences="1">
-      <code>array</code>
-    </MixedInferredReturnType>
     <MixedMethodCall occurrences="2">
       <code>new $processor()</code>
       <code>new $provider()</code>
     </MixedMethodCall>
-    <MixedReturnStatement occurrences="1">
-      <code>$config</code>
-    </MixedReturnStatement>
-    <MixedReturnTypeCoercion occurrences="4">
-      <code>$processor</code>
-      <code>$provider</code>
-      <code>callable</code>
-      <code>callable</code>
-    </MixedReturnTypeCoercion>
     <PropertyNotSetInConstructor occurrences="1">
       <code>$config</code>
     </PropertyNotSetInConstructor>
