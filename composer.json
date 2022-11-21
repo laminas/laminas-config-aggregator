@@ -57,13 +57,15 @@
     "scripts": {
         "check": [
             "@cs-check",
+            "@static-analysis",
             "@test"
         ],
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
-        "static-analysis": "psalm --shepherd --stats"
+        "static-analysis": "psalm --shepherd --stats",
+        "update-baseline": "psalm --update-baseline"
     },
     "conflict": {
         "zendframework/zend-config-aggregator": "*",
