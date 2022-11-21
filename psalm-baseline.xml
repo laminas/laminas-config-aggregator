@@ -4,15 +4,13 @@
     <MissingDocblockType occurrences="1">
       <code>private function mergeArray(array $a, array $b): array</code>
     </MissingDocblockType>
-    <MixedArgument occurrences="3">
+    <MixedArgument occurrences="1">
       <code>$mode</code>
-      <code>$processor</code>
-      <code>$provider</code>
     </MixedArgument>
     <MixedArrayOffset occurrences="1">
       <code>$config[static::ENABLE_CACHE]</code>
     </MixedArrayOffset>
-    <MixedAssignment occurrences="11">
+    <MixedAssignment occurrences="9">
       <code>$a[$key]</code>
       <code>$a[$key]</code>
       <code>$a[$key]</code>
@@ -20,8 +18,6 @@
       <code>$cfg</code>
       <code>$config</code>
       <code>$mode</code>
-      <code>$processor</code>
-      <code>$provider</code>
       <code>$this-&gt;config</code>
       <code>$value</code>
     </MixedAssignment>
@@ -41,16 +37,9 @@
       <code>callable</code>
       <code>callable</code>
     </MixedReturnTypeCoercion>
-    <PossiblyNullArgument occurrences="2">
-      <code>$contents</code>
-      <code>$contents</code>
-    </PossiblyNullArgument>
     <PropertyNotSetInConstructor occurrences="1">
       <code>$config</code>
     </PropertyNotSetInConstructor>
-    <RedundantConditionGivenDocblockType occurrences="1">
-      <code>is_callable($variable)</code>
-    </RedundantConditionGivenDocblockType>
   </file>
   <file src="src/LaminasConfigProvider.php">
     <InvalidReturnStatement occurrences="1">
