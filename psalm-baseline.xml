@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="4.24.0@06dd975cb55d36af80f242561738f16c5f58264f">
+<files psalm-version="4.30.0@d0bc6e25d89f649e4f36a534f330f8bb4643dd69">
   <file src="src/ConfigAggregator.php">
     <MissingDocblockType occurrences="1">
       <code>private function mergeArray(array $a, array $b): array</code>
@@ -78,9 +78,6 @@
       <code>$input</code>
       <code>$input</code>
     </MissingClosureParamType>
-    <MissingClosureReturnType occurrences="2">
-      <code>static fn($input)</code>
-    </MissingClosureReturnType>
     <MixedArgument occurrences="1">
       <code>$input</code>
     </MixedArgument>
