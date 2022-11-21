@@ -12,7 +12,7 @@ use function sprintf;
 class ConfigCannotBeCachedException extends RuntimeException
 {
     /**
-     * @return ConfigCannotBeCachedException
+     * @return self
      */
     public static function fromExporterException(ExportException $exportException)
     {

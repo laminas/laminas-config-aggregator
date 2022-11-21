@@ -12,7 +12,7 @@ class InvalidConfigProviderException extends RuntimeException
 {
     /**
      * @param string $provider
-     * @return InvalidConfigProviderException
+     * @return self
      */
     public static function fromNamedProvider($provider)
     {
@@ -24,7 +24,7 @@ class InvalidConfigProviderException extends RuntimeException
 
     /**
      * @param string $type
-     * @return InvalidConfigProviderException
+     * @return self
      */
     public static function fromUnsupportedType($type)
     {

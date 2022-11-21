@@ -12,7 +12,7 @@ class InvalidConfigProcessorException extends RuntimeException
 {
     /**
      * @param string $processor
-     * @return InvalidConfigProcessorException
+     * @return self
      */
     public static function fromNamedProcessor($processor)
     {
@@ -24,7 +24,7 @@ class InvalidConfigProcessorException extends RuntimeException
 
     /**
      * @param string $type
-     * @return InvalidConfigProcessorException
+     * @return self
      */
     public static function fromUnsupportedType($type)
     {

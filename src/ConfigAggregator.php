@@ -92,10 +92,9 @@ EOT;
      *
      * Raises an exception for any other condition.
      *
-     * @return callable
      * @throws InvalidConfigProviderException
      */
-    private function resolveProvider(string|callable $provider)
+    private function resolveProvider(string|callable $provider): callable
     {
         if (is_string($provider)) {
             if (! class_exists($provider)) {
@@ -122,10 +121,9 @@ EOT;
      *
      * Raises an exception for any other condition.
      *
-     * @return callable
      * @throws InvalidConfigProcessorException
      */
-    private function resolveProcessor(string|callable $processor)
+    private function resolveProcessor(string|callable $processor): callable
     {
         if (is_string($processor)) {
             if (! class_exists($processor)) {
