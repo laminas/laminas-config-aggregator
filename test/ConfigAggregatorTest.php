@@ -7,6 +7,7 @@ namespace LaminasTest\ConfigAggregator;
 use Generator;
 use Iterator;
 use IteratorAggregate;
+use Laminas\ConfigAggregator\ArrayProvider;
 use Laminas\ConfigAggregator\ConfigAggregator;
 use Laminas\ConfigAggregator\ConfigCannotBeCachedException;
 use Laminas\ConfigAggregator\InvalidConfigProcessorException;
@@ -14,6 +15,7 @@ use Laminas\ConfigAggregator\InvalidConfigProviderException;
 use LaminasTest\ConfigAggregator\Resources\BarConfigProvider;
 use LaminasTest\ConfigAggregator\Resources\FooConfigProvider;
 use LaminasTest\ConfigAggregator\Resources\FooPostProcessor;
+use LaminasTest\ConfigAggregator\Resources\FooPreProcessor;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
@@ -31,6 +33,9 @@ use function umask;
 use function unlink;
 use function var_export;
 
+/**
+ * @psalm-import-type ProviderIterable from ConfigAggregator
+ */
 class ConfigAggregatorTest extends TestCase
 {
     /** @var non-empty-string */
@@ -241,19 +246,19 @@ class ConfigAggregatorTest extends TestCase
         self::assertSame($expected, $mergedConfig);
     }
 
-    public function testConfigAggregatorRaisesExceptionIfProcessorClassDoesNotExist(): void
+    public function testConfigAggregatorRaisesExceptionIfPostProcessorClassDoesNotExist(): void
     {
         $this->expectException(InvalidConfigProcessorException::class);
         new ConfigAggregator([], null, ['NonExistentConfigProcessor']);
     }
 
-    public function testConfigAggregatorRaisesExceptionIfProcessorIsNotCallable(): void
+    public function testConfigAggregatorRaisesExceptionIfPostProcessorIsNotCallable(): void
     {
         $this->expectException(InvalidConfigProcessorException::class);
         new ConfigAggregator([], null, [stdClass::class]);
     }
 
-    public function testProcessorCanBeClosure(): void
+    public function testPostProcessorCanBeClosure(): void
     {
         $aggregator = new ConfigAggregator([], null, [
             static fn(array $config) => $config + ['processor' => 'closure'],
@@ -271,5 +276,42 @@ class ConfigAggregatorTest extends TestCase
         $mergedConfig = $aggregator->getMergedConfig();
 
         self::assertSame(['foo' => 'bar', 'post-processed' => true], $mergedConfig);
+    }
+
+    public function testConfigAggregatorRaisesExceptionIfPreProcessorClassDoesNotExist(): void
+    {
+        $this->expectException(InvalidConfigProcessorException::class);
+        new ConfigAggregator([], null, [], ['NonExistentConfigProcessor']);
+    }
+
+    public function testConfigAggregatorRaisesExceptionIfPreProcessorIsNotCallable(): void
+    {
+        $this->expectException(InvalidConfigProcessorException::class);
+        new ConfigAggregator([], null, [], [stdClass::class]);
+    }
+
+    public function testPreProcessorCanBeClosure(): void
+    {
+        $extraProvider = new ArrayProvider(['processor' => 'closure']);
+        $aggregator    = new ConfigAggregator([], null, [], [
+            /**
+             * @param ProviderIterable $providers
+             * @return ProviderIterable
+             */
+            static fn(iterable $providers): iterable => [...$providers, $extraProvider],
+        ]);
+
+        $config = $aggregator->getMergedConfig();
+        self::assertSame(['processor' => 'closure'], $config);
+    }
+
+    public function testConfigAggregatorCanPreProcessConfiguration(): void
+    {
+        $aggregator   = new ConfigAggregator([
+            static fn(): array => ['foo' => 'bar'],
+        ], null, [], [new FooPreProcessor()]);
+        $mergedConfig = $aggregator->getMergedConfig();
+
+        self::assertSame(['foo' => 'bar', 'pre-processed' => true], $mergedConfig);
     }
 }
