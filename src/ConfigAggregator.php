@@ -300,9 +300,9 @@ EOT;
     private function preProcessProviders(array $processors, iterable $providers): iterable
     {
         foreach ($processors as $processor) {
-            /** @var PreProcessorCallable $processor */
-            $processor = $this->resolveProcessor($processor);
-            $providers = $processor($providers);
+            /** @var PreProcessorCallable $processorCallable */
+            $processorCallable = $this->resolveProcessor($processor);
+            $providers         = $processorCallable($providers);
         }
 
         return $providers;
@@ -314,9 +314,9 @@ EOT;
     private function postProcessConfig(array $processors, array $config): array
     {
         foreach ($processors as $processor) {
-            /** @var PostProcessorCallable $processor */
-            $processor = $this->resolveProcessor($processor);
-            $config    = $processor($config);
+            /** @var PostProcessorCallable $processorCallable */
+            $processorCallable = $this->resolveProcessor($processor);
+            $config            = $processorCallable($config);
         }
 
         return $config;
