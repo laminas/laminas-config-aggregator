@@ -18,10 +18,9 @@ trait GlobTrait
      * ensure results are sorted by brace pattern order _after_
      * sorting by filename.
      *
-     * @param string $pattern
      * @return array
      */
-    private function glob($pattern)
+    private function glob(string $pattern): array
     {
         return Glob::glob($pattern, Glob::GLOB_BRACE, true);
     }

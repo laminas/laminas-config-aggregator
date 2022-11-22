@@ -33,6 +33,7 @@ use function var_export;
 
 class ConfigAggregatorTest extends TestCase
 {
+    /** @var non-empty-string */
     private string $cacheFile;
 
     protected function setUp(): void

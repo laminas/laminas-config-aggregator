@@ -14,7 +14,7 @@ class PhpFileProvider
     use GlobTrait;
 
     /**
-     * @param string $pattern A glob pattern by which to look up config files.
+     * @param non-empty-string $pattern A glob pattern by which to look up config files.
      */
     public function __construct(private string $pattern)
     {

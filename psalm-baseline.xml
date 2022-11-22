@@ -1,56 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="4.24.0@06dd975cb55d36af80f242561738f16c5f58264f">
+<files psalm-version="4.30.0@d0bc6e25d89f649e4f36a534f330f8bb4643dd69">
   <file src="src/ConfigAggregator.php">
     <MissingDocblockType occurrences="1">
       <code>private function mergeArray(array $a, array $b): array</code>
     </MissingDocblockType>
-    <MixedArgument occurrences="3">
+    <MixedArgument occurrences="1">
       <code>$mode</code>
-      <code>$processor</code>
-      <code>$provider</code>
     </MixedArgument>
     <MixedArrayOffset occurrences="1">
       <code>$config[static::ENABLE_CACHE]</code>
     </MixedArrayOffset>
-    <MixedAssignment occurrences="11">
+    <MixedAssignment occurrences="8">
       <code>$a[$key]</code>
       <code>$a[$key]</code>
       <code>$a[$key]</code>
       <code>$a[]</code>
       <code>$cfg</code>
-      <code>$config</code>
       <code>$mode</code>
-      <code>$processor</code>
-      <code>$provider</code>
       <code>$this-&gt;config</code>
       <code>$value</code>
     </MixedAssignment>
-    <MixedInferredReturnType occurrences="1">
-      <code>array</code>
-    </MixedInferredReturnType>
     <MixedMethodCall occurrences="2">
       <code>new $processor()</code>
       <code>new $provider()</code>
     </MixedMethodCall>
-    <MixedReturnStatement occurrences="1">
-      <code>$config</code>
-    </MixedReturnStatement>
-    <MixedReturnTypeCoercion occurrences="4">
-      <code>$processor</code>
-      <code>$provider</code>
-      <code>callable</code>
-      <code>callable</code>
-    </MixedReturnTypeCoercion>
-    <PossiblyNullArgument occurrences="2">
-      <code>$contents</code>
-      <code>$contents</code>
-    </PossiblyNullArgument>
     <PropertyNotSetInConstructor occurrences="1">
       <code>$config</code>
     </PropertyNotSetInConstructor>
-    <RedundantConditionGivenDocblockType occurrences="1">
-      <code>is_callable($variable)</code>
-    </RedundantConditionGivenDocblockType>
   </file>
   <file src="src/LaminasConfigProvider.php">
     <InvalidReturnStatement occurrences="1">
@@ -78,9 +54,6 @@
       <code>$input</code>
       <code>$input</code>
     </MissingClosureParamType>
-    <MissingClosureReturnType occurrences="2">
-      <code>static fn($input)</code>
-    </MissingClosureReturnType>
     <MixedArgument occurrences="1">
       <code>$input</code>
     </MixedArgument>

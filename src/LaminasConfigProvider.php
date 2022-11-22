@@ -15,7 +15,7 @@ class LaminasConfigProvider
     use GlobTrait;
 
     /**
-     * @param string $pattern Glob pattern.
+     * @param non-empty-string $pattern Glob pattern.
      */
     public function __construct(private string $pattern)
     {
