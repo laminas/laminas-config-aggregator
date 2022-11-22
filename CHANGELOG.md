@@ -2,27 +2,24 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 1.12.0 - TBD
+## 1.12.0 - 2022-11-22
 
-### Added
 
-- Nothing.
+-----
 
-### Changed
+### Release Notes for [1.12.0](https://github.com/laminas/laminas-config-aggregator/milestone/21)
 
-- Nothing.
+Feature release (minor)
 
-### Deprecated
+### 1.12.0
 
-- Nothing.
+- Total issues resolved: **0**
+- Total pull requests resolved: **1**
+- Total contributors: **1**
 
-### Removed
+#### Documentation,Enhancement
 
-- Nothing.
-
-### Fixed
-
-- Nothing.
+ - [29: Some minor type improvements](https://github.com/laminas/laminas-config-aggregator/pull/29) thanks to @internalsystemerror
 
 ## 1.11.0 - 2022-10-11
 
