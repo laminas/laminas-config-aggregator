@@ -1,9 +1,8 @@
-# Post processors
+# Config processors
 
-The `ConfigAggregator` can apply post processors to the merged configuration by
-aggregating "config processors" passed to its constructor. Each processor
-should be a PHP `callable` which consumes the merged configuration as its sole
-argument, and which then returns the processed configuration array.
+The `ConfigAggregator` can apply processors to the configuration by aggregating "config processors" passed to its
+constructor. Each processor should be a PHP `callable` which consumes either the list of providers (pre-processors) or
+the merged configuration (post-processors) as its sole argument, and which then returns the processed array.
 
 ```php
 $providers = [
@@ -13,13 +12,19 @@ $providers = [
     new PhpFileProvider('*.global.php'),
 ];
 
-$processors = [
+$preProcessors = [
+    function (iterable $providers) {
+        return [...$providers, new ArrayProvider(['pre-processed' => true])];
+    }
+];
+
+$postProcessors = [
     function (array $config) {
         return $config + ['post-processed' => true];
     },
 ];
 
-$aggregator = new ConfigAggregator($providers, null, $processors);
+$aggregator = new ConfigAggregator($providers, null, $postProcessors, $preProcessors);
 var_dump($aggregator->getMergedConfig());
 ```
 
@@ -29,6 +34,8 @@ Output from the example:
 array(2) {
   'foo' =>
   string(3) "bar"
+  'pre-processed' =>
+  bool(true)
   'post-processed' =>
   bool(true)
 }
@@ -37,15 +44,23 @@ array(2) {
 If the processor is a class name, the aggregator automatically instantiates it
 before invoking it; as such, any class name you use as a config provider
 **must** also define `__invoke()`, and that method **must** return an array and
-**may** consume the merged configuration as a parameter.
+**may** consume either the list of providers (pre-processors) or merged 
+configuration (post-processors) as a parameter.
 
-Post processors can be used to mimic tools such as the [Symfony configuration
+## Pre-processor examples
+
+Pre-processors can be used to modify the list of providers prior to their
+configuration being retrieved. This could be used to provide a list of providers for
+use in development, or to allow providers to have their own dependencies as just a
+couple of examples.
+
+## Post-processor examples
+
+Post-processors can be used to mimic tools such as the [Symfony configuration
 parameter system](https://symfony.com/doc/current/service_container/parameters.html).
 As an example, you can specify a config processor which consumes the merged
 configuration and resolves templated parameters to other parameters within your
 configuration.
-
-## Post processor examples
 
 ### Symfony ParameterBag Post Processor
 

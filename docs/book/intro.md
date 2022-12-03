@@ -74,8 +74,7 @@ $aggregator = new ConfigAggregator([
 ]);
 ```
 
-You can also supply [post processors](config-post-processors.md) for
-configuration. These are PHP callables that accept the merged configuration as
-an argument, do something with it, and return configuration on completion. This
-could be used, for example, to allow templating parameters that are used in
-multiple locations and resolving them to a single value later.
+You can also supply [processors](config-processors.md) for configuration. These are PHP callables that accept either the
+list of providers (pre-processors) or the merged configuration (post-processors) as an argument, do something with it,
+and return it on completion. This could be used, for example, to attach development only providers, or to allow
+templating parameters that are used in multiple locations and resolving them to a single value later.
