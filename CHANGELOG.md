@@ -2,27 +2,28 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 1.13.0 - TBD
+## 1.13.0 - 2022-12-03
 
-### Added
 
-- Nothing.
+-----
 
-### Changed
+### Release Notes for [1.13.0](https://github.com/laminas/laminas-config-aggregator/milestone/23)
 
-- Nothing.
+Feature release (minor)
 
-### Deprecated
+### 1.13.0
 
-- Nothing.
+- Total issues resolved: **0**
+- Total pull requests resolved: **2**
+- Total contributors: **2**
 
-### Removed
+#### renovate
 
-- Nothing.
+ - [30: Update dependency vimeo/psalm to v5](https://github.com/laminas/laminas-config-aggregator/pull/30) thanks to @renovate[bot]
 
-### Fixed
+#### Enhancement
 
-- Nothing.
+ - [28: Add ability to preprocess the list of providers](https://github.com/laminas/laminas-config-aggregator/pull/28) thanks to @internalsystemerror
 
 ## 1.12.0 - 2022-11-22
 
