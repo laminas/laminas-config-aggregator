@@ -165,7 +165,7 @@
                     
                         
                             <li class="subnavigation__list-item ">
-                                <a href="../config-post-processors/" class="subnavigation__link">Post Processors</a>
+                                <a href="../config-processors/" class="subnavigation__link">Config Processors</a>
                             </li>
                         
                     
@@ -344,11 +344,10 @@ use Laminas\ConfigAggregator\LaminasConfigProvider;
 $aggregator = new ConfigAggregator([
     new LaminasConfigProvider('config/*.{json,yaml,php}'),
 ]);</code></pre>
-<p>You can also supply <a href="../config-post-processors/">post processors</a> for
-configuration. These are PHP callables that accept the merged configuration as
-an argument, do something with it, and return configuration on completion. This
-could be used, for example, to allow templating parameters that are used in
-multiple locations and resolving them to a single value later.</p>
+<p>You can also supply <a href="../config-processors/">processors</a> for configuration. These are PHP callables that accept either the
+list of providers (pre-processors) or the merged configuration (post-processors) as an argument, do something with it,
+and return it on completion. This could be used, for example, to attach development only providers, or to allow
+templating parameters that are used in multiple locations and resolving them to a single value later.</p>
 
 
 
@@ -448,7 +447,7 @@ multiple locations and resolving them to a single value later.</p>
                     
                         
                             <li class="subnavigation__list-item ">
-                                <a href="../config-post-processors/" class="subnavigation__link">Post Processors</a>
+                                <a href="../config-processors/" class="subnavigation__link">Config Processors</a>
                             </li>
                         
                     

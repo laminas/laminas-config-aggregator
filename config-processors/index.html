@@ -13,10 +13,10 @@
     <meta name="docsearch:language" content="en">
     <meta name="docsearch:component" content="laminas-config-aggregator">
 
-    <link rel="canonical" href="https://docs.laminas.dev/laminas-config-aggregator/config-post-processors/">
+    <link rel="canonical" href="https://docs.laminas.dev/laminas-config-aggregator/config-processors/">
     <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>Post Processors - laminas-config-aggregator - Laminas Docs</title>
+    <title>Config Processors - laminas-config-aggregator - Laminas Docs</title>
 
     <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
     
@@ -165,7 +165,7 @@
                     
                         
                             <li class="subnavigation__list-item subnavigation__list-item--active">
-                                <a href="./" class="subnavigation__link">Post Processors</a>
+                                <a href="./" class="subnavigation__link">Config Processors</a>
                             </li>
                         
                     
@@ -255,7 +255,11 @@
             <ul class="toc__list">
                 
                     <li class="toc__entry">
-                        <a href="#post-processor-examples" class="toc__link nav-link">Post processor examples</a>
+                        <a href="#pre-processor-examples" class="toc__link nav-link">Pre-processor examples</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#post-processor-examples" class="toc__link nav-link">Post-processor examples</a>
                     </li>
                 
             </ul>
@@ -276,7 +280,7 @@
 
                 
 
-                <li class="breadcrumb-item active" aria-current="page">Post Processors</li>
+                <li class="breadcrumb-item active" aria-current="page">Config Processors</li>
             
         
     </ol>
@@ -290,11 +294,10 @@
     
     
 
-    <h1 id="post-processors">Post processors</h1>
-<p>The <code>ConfigAggregator</code> can apply post processors to the merged configuration by
-aggregating "config processors" passed to its constructor. Each processor
-should be a PHP <code>callable</code> which consumes the merged configuration as its sole
-argument, and which then returns the processed configuration array.</p>
+    <h1 id="config-processors">Config processors</h1>
+<p>The <code>ConfigAggregator</code> can apply processors to the configuration by aggregating "config processors" passed to its
+constructor. Each processor should be a PHP <code>callable</code> which consumes either the list of providers (pre-processors) or
+the merged configuration (post-processors) as its sole argument, and which then returns the processed array.</p>
 <pre class="highlight"><code class="language-php">$providers = [
     function () {
         return ['foo' =&gt; 'bar'];
@@ -302,31 +305,45 @@ argument, and which then returns the processed configuration array.</p>
     new PhpFileProvider('*.global.php'),
 ];
 
-$processors = [
+$preProcessors = [
+    function (iterable $providers) {
+        return [...$providers, new ArrayProvider(['pre-processed' =&gt; true])];
+    }
+];
+
+$postProcessors = [
     function (array $config) {
         return $config + ['post-processed' =&gt; true];
     },
 ];
 
-$aggregator = new ConfigAggregator($providers, null, $processors);
+$aggregator = new ConfigAggregator($providers, null, $postProcessors, $preProcessors);
 var_dump($aggregator-&gt;getMergedConfig());</code></pre>
 <p>Output from the example:</p>
 <pre class="highlight"><code class="language-php">array(2) {
   'foo' =&gt;
   string(3) "bar"
+  'pre-processed' =&gt;
+  bool(true)
   'post-processed' =&gt;
   bool(true)
 }</code></pre>
 <p>If the processor is a class name, the aggregator automatically instantiates it
 before invoking it; as such, any class name you use as a config provider
 <strong>must</strong> also define <code>__invoke()</code>, and that method <strong>must</strong> return an array and
-<strong>may</strong> consume the merged configuration as a parameter.</p>
-<p>Post processors can be used to mimic tools such as the <a href="https://symfony.com/doc/current/service_container/parameters.html">Symfony configuration
+<strong>may</strong> consume either the list of providers (pre-processors) or merged 
+configuration (post-processors) as a parameter.</p>
+<h2 id="pre-processor-examples">Pre-processor examples</h2>
+<p>Pre-processors can be used to modify the list of providers prior to their
+configuration being retrieved. This could be used to provide a list of providers for
+use in development, or to allow providers to have their own dependencies as just a
+couple of examples.</p>
+<h2 id="post-processor-examples">Post-processor examples</h2>
+<p>Post-processors can be used to mimic tools such as the <a href="https://symfony.com/doc/current/service_container/parameters.html">Symfony configuration
 parameter system</a>.
 As an example, you can specify a config processor which consumes the merged
 configuration and resolves templated parameters to other parameters within your
 configuration.</p>
-<h2 id="post-processor-examples">Post processor examples</h2>
 <h3 id="symfony-parameterbag-post-processor">Symfony ParameterBag Post Processor</h3>
 <p>The following example resolves templated parameters to either other parameters
 within your configuration, or a static set of substitutions. Templated
@@ -502,7 +519,7 @@ var_dump($aggregator-&gt;getMergedConfig());</code></pre>
                     
                         
                             <li class="subnavigation__list-item subnavigation__list-item--active">
-                                <a href="./" class="subnavigation__link">Post Processors</a>
+                                <a href="./" class="subnavigation__link">Config Processors</a>
                             </li>
                         
                     
