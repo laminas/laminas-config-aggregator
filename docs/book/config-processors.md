@@ -44,7 +44,7 @@ array(2) {
 If the processor is a class name, the aggregator automatically instantiates it
 before invoking it; as such, any class name you use as a config provider
 **must** also define `__invoke()`, and that method **must** return an array and
-**may** consume either the list of providers (pre-processors) or merged 
+**may** consume either the list of providers (pre-processors) or merged
 configuration (post-processors) as a parameter.
 
 ## Pre-processor examples
