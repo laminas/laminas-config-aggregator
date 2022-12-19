@@ -34,10 +34,11 @@
     "require-dev": {
         "laminas/laminas-coding-standard": "~2.4.0",
         "laminas/laminas-config": "^3.8.0",
-        "laminas/laminas-servicemanager": "^3.19",
-        "phpunit/phpunit": "^9.5.26",
-        "psalm/plugin-phpunit": "^0.18.0",
-        "vimeo/psalm": "^5.0"
+        "laminas/laminas-servicemanager": "^3.20",
+        "nikic/php-parser": "^4.13.2",
+        "phpunit/phpunit": "^9.5.27",
+        "psalm/plugin-phpunit": "^0.18.4",
+        "vimeo/psalm": "^5.3"
     },
     "suggest": {
         "laminas/laminas-config": "Allows loading configuration from XML, INI, YAML, and JSON files",
