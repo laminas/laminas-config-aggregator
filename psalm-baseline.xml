@@ -1,87 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.0.0@4e177bf0c9f03c17d2fbfd83b7cc9c47605274d8">
+<files psalm-version="5.15.0@5c774aca4746caf3d239d9c8cadb9f882ca29352">
   <file src="src/ConfigAggregator.php">
-    <MissingDocblockType occurrences="1">
+    <MissingDocblockType>
       <code>private function mergeArray(array $a, array $b): array</code>
     </MissingDocblockType>
-    <MixedArgument occurrences="1">
+    <MixedArgument>
       <code>$mode</code>
     </MixedArgument>
-    <MixedArrayOffset occurrences="1">
+    <MixedArrayOffset>
       <code>$config[static::ENABLE_CACHE]</code>
     </MixedArrayOffset>
-    <MixedAssignment occurrences="8">
+    <MixedAssignment>
       <code>$a[$key]</code>
       <code>$a[$key]</code>
       <code>$a[$key]</code>
       <code>$a[]</code>
       <code>$cfg</code>
       <code>$mode</code>
-      <code>$this-&gt;config</code>
+      <code><![CDATA[$this->config]]></code>
       <code>$value</code>
     </MixedAssignment>
-    <MixedMethodCall occurrences="2">
+    <MixedMethodCall>
       <code>new $processor()</code>
       <code>new $provider()</code>
     </MixedMethodCall>
-    <PropertyNotSetInConstructor occurrences="1">
+    <PropertyNotSetInConstructor>
       <code>$config</code>
     </PropertyNotSetInConstructor>
   </file>
   <file src="src/LaminasConfigProvider.php">
-    <InvalidReturnStatement occurrences="1">
+    <InvalidReturnStatement>
       <code>ConfigFactory::fromFiles($files)</code>
     </InvalidReturnStatement>
-    <InvalidReturnType occurrences="1">
+    <InvalidReturnType>
       <code>array</code>
     </InvalidReturnType>
   </file>
   <file src="src/PhpFileProvider.php">
-    <MixedAssignment occurrences="1">
+    <MixedAssignment>
       <code>$file</code>
     </MixedAssignment>
-    <UnresolvableInclude occurrences="1">
+    <UnresolvableInclude>
       <code>include $file</code>
     </UnresolvableInclude>
   </file>
   <file src="test/ArrayProviderTest.php">
-    <RedundantCondition occurrences="1">
+    <RedundantCondition>
       <code>assertIsCallable</code>
     </RedundantCondition>
   </file>
   <file src="test/ConfigAggregatorTest.php">
-    <MissingClosureParamType occurrences="2">
+    <MissingClosureParamType>
       <code>$input</code>
       <code>$input</code>
     </MissingClosureParamType>
-    <MixedArgument occurrences="1">
+    <MixedArgument>
       <code>$input</code>
     </MixedArgument>
-    <MixedArrayAccess occurrences="2">
+    <MixedArrayAccess>
       <code>$cachedConfig['addPrefix']</code>
       <code>$cachedConfig['toUpper']</code>
     </MixedArrayAccess>
-    <MixedAssignment occurrences="2">
+    <MixedAssignment>
       <code>$cachedConfig</code>
       <code>$cachedConfig</code>
     </MixedAssignment>
-    <MixedOperand occurrences="1">
+    <MixedOperand>
       <code>$input</code>
     </MixedOperand>
-    <RedundantConditionGivenDocblockType occurrences="1">
+    <RedundantConditionGivenDocblockType>
       <code>assertIsArray</code>
     </RedundantConditionGivenDocblockType>
-    <UnresolvableInclude occurrences="3">
-      <code>include $this-&gt;cacheFile</code>
-      <code>include $this-&gt;cacheFile</code>
-      <code>include $this-&gt;cacheFile</code>
+    <UnresolvableInclude>
+      <code><![CDATA[include $this->cacheFile]]></code>
+      <code><![CDATA[include $this->cacheFile]]></code>
+      <code><![CDATA[include $this->cacheFile]]></code>
     </UnresolvableInclude>
   </file>
   <file src="test/PhpFileProviderTest.php">
-    <MixedArgument occurrences="1">
+    <MixedArgument>
       <code>$item</code>
     </MixedArgument>
-    <MixedAssignment occurrences="1">
+    <MixedAssignment>
       <code>$item</code>
     </MixedAssignment>
   </file>
