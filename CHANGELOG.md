@@ -2,27 +2,30 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 1.14.0 - TBD
+## 1.14.0 - 2023-09-19
 
-### Added
 
-- Nothing.
+-----
 
-### Changed
+### Release Notes for [1.14.0](https://github.com/laminas/laminas-config-aggregator/milestone/25)
 
-- Nothing.
+Feature release (minor)
 
-### Deprecated
+### 1.14.0
 
-- Nothing.
+- Total issues resolved: **0**
+- Total pull requests resolved: **4**
+- Total contributors: **2**
 
-### Removed
+#### Enhancement
 
-- Nothing.
+ - [38: Remove support for PHP 8.0, add support for PHP 8.3](https://github.com/laminas/laminas-config-aggregator/pull/38) thanks to @gsteel
 
-### Fixed
+#### renovate
 
-- Nothing.
+ - [37: Bump brick/varexporter to ^0.4.0](https://github.com/laminas/laminas-config-aggregator/pull/37) thanks to @renovate[bot]
+ - [32: Lock file maintenance](https://github.com/laminas/laminas-config-aggregator/pull/32) thanks to @renovate[bot]
+ - [31: Lock file maintenance](https://github.com/laminas/laminas-config-aggregator/pull/31) thanks to @renovate[bot]
 
 ## 1.13.0 - 2022-12-03
 
