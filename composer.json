@@ -27,7 +27,7 @@
     "extra": {},
     "require": {
         "php": "~8.0.0 || ~8.1.0 || ~8.2.0",
-        "brick/varexporter": "^0.3.7",
+        "brick/varexporter": "^0.4.0",
         "laminas/laminas-stdlib": "^3.10.1",
         "webimpress/safe-writer": "^2.2.0"
     },
