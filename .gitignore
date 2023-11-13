@@ -1,4 +1,3 @@
-/.phpunit.result.cache
 /.phpunit.cache
 /.psalm-cache
 .phpcs-cache
