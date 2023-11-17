@@ -58,8 +58,8 @@
       <code>$input</code>
     </MixedArgument>
     <MixedArrayAccess>
-      <code>$cachedConfig['addPrefix']</code>
-      <code>$cachedConfig['toUpper']</code>
+      <code><![CDATA[$cachedConfig['addPrefix']]]></code>
+      <code><![CDATA[$cachedConfig['toUpper']]]></code>
     </MixedArrayAccess>
     <MixedAssignment>
       <code>$cachedConfig</code>
