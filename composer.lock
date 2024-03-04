@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e61e1ae1ffaa3aa49aa3db6b5de92531",
+    "content-hash": "3e3f519d3b9019f5d17cb6ad72287003",
     "packages": [
         {
             "name": "brick/varexporter",
@@ -1085,93 +1085,6 @@
                 }
             ],
             "time": "2023-09-19T12:02:54+00:00"
-        },
-        {
-            "name": "laminas/laminas-servicemanager",
-            "version": "4.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laminas/laminas-servicemanager.git",
-                "reference": "aa4b0f55004c85ed8bf9883050b43a14c8335b5c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-servicemanager/zipball/aa4b0f55004c85ed8bf9883050b43a14c8335b5c",
-                "reference": "aa4b0f55004c85ed8bf9883050b43a14c8335b5c",
-                "shasum": ""
-            },
-            "require": {
-                "brick/varexporter": "^0.3.8 || ^0.4.0",
-                "laminas/laminas-stdlib": "^3.17",
-                "php": "~8.1.0 || ~8.2.0 || ~8.3.0",
-                "psr/container": "^1.1 || ^2.0"
-            },
-            "conflict": {
-                "laminas/laminas-code": "<4.10.0",
-                "zendframework/zend-code": "<3.3.1"
-            },
-            "provide": {
-                "psr/container-implementation": "^1.0 || ^2.0"
-            },
-            "require-dev": {
-                "boesing/psalm-plugin-stringf": "^1.4",
-                "composer/package-versions-deprecated": "^1.11.99.5",
-                "friendsofphp/proxy-manager-lts": "^1",
-                "laminas/laminas-cli": "^1.8",
-                "laminas/laminas-coding-standard": "~2.5.0",
-                "laminas/laminas-container-config-test": "^1.0",
-                "lctrs/psalm-psr-container-plugin": "^1.9",
-                "mikey179/vfsstream": "^1.6.11@alpha",
-                "phpbench/phpbench": "^1.2.7",
-                "phpunit/phpunit": "^10.4",
-                "psalm/plugin-phpunit": "^0.18.4",
-                "symfony/console": "^6.0",
-                "vimeo/psalm": "^5.22"
-            },
-            "suggest": {
-                "friendsofphp/proxy-manager-lts": "To handle lazy initialization of services",
-                "laminas/laminas-cli": "To consume CLI commands provided by this component"
-            },
-            "type": "library",
-            "extra": {
-                "laminas": {
-                    "config-provider": "Laminas\\ServiceManager\\ConfigProvider",
-                    "module": "Laminas\\ServiceManager"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Laminas\\ServiceManager\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Factory-Driven Dependency Injection Container",
-            "homepage": "https://laminas.dev",
-            "keywords": [
-                "PSR-11",
-                "dependency-injection",
-                "di",
-                "dic",
-                "laminas",
-                "service-manager",
-                "servicemanager"
-            ],
-            "support": {
-                "chat": "https://laminas.dev/chat",
-                "forum": "https://discourse.laminas.dev",
-                "issues": "https://github.com/laminas/laminas-servicemanager/issues",
-                "source": "https://github.com/laminas/laminas-servicemanager/tree/4.0.0"
-            },
-            "funding": [
-                {
-                    "url": "https://funding.communitybridge.org/projects/laminas-project",
-                    "type": "community_bridge"
-                }
-            ],
-            "time": "2024-03-04T08:57:26+00:00"
         },
         {
             "name": "myclabs/deep-copy",
