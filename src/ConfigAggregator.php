@@ -17,6 +17,7 @@ use function array_key_exists;
 use function class_exists;
 use function date;
 use function file_exists;
+use function filesize;
 use function gettype;
 use function is_array;
 use function is_callable;
@@ -254,6 +255,10 @@ EOT;
         }
 
         if (! file_exists($cachedConfigFile)) {
+            return false;
+        }
+
+        if (filesize($cachedConfigFile) === 0) {
             return false;
         }
 

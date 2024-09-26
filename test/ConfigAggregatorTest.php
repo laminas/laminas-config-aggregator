@@ -230,6 +230,14 @@ class ConfigAggregatorTest extends TestCase
         self::assertFileDoesNotExist($this->cacheFile);
     }
 
+    public function testConfigAggregatorDoesNotLoadConfigFromCacheIfCacheFileIsEmpty(): void
+    {
+        file_put_contents($this->cacheFile, '');
+        $aggregator = new ConfigAggregator([], $this->cacheFile);
+
+        self::assertEmpty($aggregator->getMergedConfig());
+    }
+
     public function testConfigAggregatorCanLoadConfigFromCache(): void
     {
         $expected = [
