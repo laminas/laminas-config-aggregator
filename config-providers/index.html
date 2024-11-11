@@ -82,17 +82,6 @@
                                     </div>
                                 </div>
                             </a>
-                            <a href="https://api-tools.getlaminas.org/documentation" class="dropdown-item">
-                                <div class="row align-items-center">
-                                    <div class="col-md-4 col-sm-12">
-                                        <img src="https://docs.laminas.dev/img/laminas-api-tools-rgb.svg">
-                                    </div>
-                                    <div class="col-md-8 col-sm-12">
-                                        <strong>API Tools</strong><br>
-                                        Build RESTful APIs in Minutes
-                                    </div>
-                                </div>
-                            </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item dropdown-item--secondardy" href="https://docs.laminas.dev/migration/">
                                 <div class="row align-items-center">
@@ -255,6 +244,10 @@
             <ul class="toc__list">
                 
                     <li class="toc__entry">
+                        <a href="#duplicate-providers" class="toc__link nav-link">Duplicate providers</a>
+                    </li>
+                
+                    <li class="toc__entry">
                         <a href="#generators" class="toc__link nav-link">Generators</a>
                     </li>
                 
@@ -342,6 +335,20 @@ var_dump($aggregator-&gt;getMergedConfig());</code></pre>
   array(0) {
   }
 }</code></pre>
+<h2 id="duplicate-providers">Duplicate providers</h2>
+<p>In order to prevent accidental overwrites, <code>ConfigAggregator</code> will throw an
+<code>InvalidConfigProviderException</code> when it detects duplicate class-strings of
+the same type:</p>
+<pre class="highlight"><code class="language-php">new ConfigAggregator([
+    SomeProvider::class,
+    SomeProvider::class,
+]);</code></pre>
+<p>or duplicate instances of the same class:</p>
+<pre class="highlight"><code class="language-php">$someProvider = new SomeProvider();
+new ConfigAggregator([
+    $someProvider,
+    $someProvider,
+]);</code></pre>
 <h2 id="generators">Generators</h2>
 <p>Config providers can be written as generators. This way, a single callable can
 provide multiple configurations:</p>
@@ -575,7 +582,7 @@ For more details, please refer to the <a href="https://docs.laminas.dev/laminas-
                     <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
                     <li>Laminas Components and MVC <a href="https://docs.laminas.dev/">Components and MVC for enterprise applications</a></li>
                     <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
-                    <li>Laminas API Tools <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                    <li>Maintenance Overview <a href="https://getlaminas.org/packages-maintenance-status/">Current maintenance status of Laminas &amp; Mezzio packages</a></li>
                 </ul>
             </div>
         </div>
