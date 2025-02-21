@@ -8,6 +8,7 @@ use RuntimeException;
 
 use function sprintf;
 
+/** @final */
 class InvalidConfigProcessorException extends RuntimeException
 {
     /**

@@ -11,6 +11,7 @@ namespace Laminas\ConfigAggregator;
  *
  * @template TKey of array-key
  * @template TValue
+ * @final
  */
 class ArrayProvider
 {

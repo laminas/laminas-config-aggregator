@@ -9,6 +9,8 @@ use Laminas\Config\Factory as ConfigFactory;
 /**
  * Glob a set of any configuration files supported by Laminas\Config\Factory as
  * configuration providers.
+ *
+ * @final
  */
 class LaminasConfigProvider
 {
