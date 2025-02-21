@@ -10,7 +10,7 @@ use Laminas\ConfigAggregator\ConfigAggregator;
 /**
  * @psalm-import-type ProviderIterable from ConfigAggregator
  */
-class FooPreProcessor
+final class FooPreProcessor
 {
     /**
      * @param ProviderIterable $providers

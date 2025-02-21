@@ -6,7 +6,7 @@ namespace LaminasTest\ConfigAggregator\Resources;
 
 use ArrayObject;
 
-class FooConfigProvider
+final class FooConfigProvider
 {
     /**
      * @return array|ArrayObject

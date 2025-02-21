@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace LaminasTest\ConfigAggregator\Resources;
 
-class FooPostProcessor
+final class FooPostProcessor
 {
     /**
      * @return array

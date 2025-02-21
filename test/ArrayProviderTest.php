@@ -7,7 +7,7 @@ namespace LaminasTest\ConfigAggregator;
 use Laminas\ConfigAggregator\ArrayProvider;
 use PHPUnit\Framework\TestCase;
 
-class ArrayProviderTest extends TestCase
+final class ArrayProviderTest extends TestCase
 {
     public function testProviderIsCallable(): void
     {

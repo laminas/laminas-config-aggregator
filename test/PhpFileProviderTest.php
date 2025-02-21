@@ -8,7 +8,7 @@ use Laminas\ConfigAggregator\PhpFileProvider;
 use Laminas\Stdlib\ArrayUtils;
 use PHPUnit\Framework\TestCase;
 
-class PhpFileProviderTest extends TestCase
+final class PhpFileProviderTest extends TestCase
 {
     public function testProviderLoadsConfigFromFiles(): void
     {
