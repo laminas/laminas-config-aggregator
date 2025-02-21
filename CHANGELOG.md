@@ -2,27 +2,29 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 1.18.0 - TBD
+## 1.18.0 - 2025-02-21
 
-### Added
 
-- Nothing.
+-----
 
-### Changed
+### Release Notes for [1.18.0](https://github.com/laminas/laminas-config-aggregator/milestone/33)
 
-- Nothing.
+Feature release (minor)
 
-### Deprecated
+### 1.18.0
 
-- Nothing.
+- Total issues resolved: **0**
+- Total pull requests resolved: **3**
+- Total contributors: **2**
 
-### Removed
+#### Dependencies,Enhancement
 
-- Nothing.
+ - [56: Update dependency brick/varexporter to ^0.5.0 || ^0.4.0 || ^0.6.0](https://github.com/laminas/laminas-config-aggregator/pull/56) thanks to @renovate[bot]
+ - [55: allow newer varexporter version](https://github.com/laminas/laminas-config-aggregator/pull/55) thanks to @reinfi
 
-### Fixed
+#### Dependencies,Enhancement,QA
 
-- Nothing.
+ - [53: Update Psalm to v6 marking all classes as soft `@final`](https://github.com/laminas/laminas-config-aggregator/pull/53) thanks to @renovate[bot]
 
 ## 1.17.0 - 2024-11-17
 
