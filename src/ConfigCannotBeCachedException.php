@@ -9,6 +9,7 @@ use RuntimeException;
 
 use function sprintf;
 
+/** @final */
 class ConfigCannotBeCachedException extends RuntimeException
 {
     /**

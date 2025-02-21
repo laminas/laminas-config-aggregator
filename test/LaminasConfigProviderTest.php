@@ -7,7 +7,7 @@ namespace LaminasTest\ConfigAggregator;
 use Laminas\ConfigAggregator\LaminasConfigProvider;
 use PHPUnit\Framework\TestCase;
 
-class LaminasConfigProviderTest extends TestCase
+final class LaminasConfigProviderTest extends TestCase
 {
     public function testProviderLoadsConfigFromFiles(): void
     {

@@ -34,6 +34,7 @@ use function sprintf;
  * @psalm-type ProviderIterable = iterable<int, ProviderCallable|class-string>
  * @psalm-type PostProcessorCallable = callable(array): array
  * @psalm-type PreProcessorCallable = callable(ProviderIterable): ProviderIterable
+ * @final
  */
 class ConfigAggregator
 {

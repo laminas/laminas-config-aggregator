@@ -16,6 +16,7 @@ use LaminasTest\ConfigAggregator\Resources\BarConfigProvider;
 use LaminasTest\ConfigAggregator\Resources\FooConfigProvider;
 use LaminasTest\ConfigAggregator\Resources\FooPostProcessor;
 use LaminasTest\ConfigAggregator\Resources\FooPreProcessor;
+use Override;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
@@ -36,11 +37,12 @@ use function var_export;
 /**
  * @psalm-import-type ProviderIterable from ConfigAggregator
  */
-class ConfigAggregatorTest extends TestCase
+final class ConfigAggregatorTest extends TestCase
 {
     /** @var non-empty-string */
     private string $cacheFile;
 
+    #[Override]
     protected function setUp(): void
     {
         parent::setUp();
@@ -51,6 +53,7 @@ class ConfigAggregatorTest extends TestCase
         $this->cacheFile = $dir . '/cache';
     }
 
+    #[Override]
     protected function tearDown(): void
     {
         @unlink($this->cacheFile);
@@ -269,7 +272,9 @@ class ConfigAggregatorTest extends TestCase
         new ConfigAggregator([
             static fn(): array => ['foo' => 'bar', ConfigAggregator::ENABLE_CACHE => true],
         ], $this->cacheFile);
-        self::assertSame(0666 & ~umask(), fileperms($this->cacheFile) & 0777);
+        $fileperms = fileperms($this->cacheFile);
+        self::assertNotFalse($fileperms);
+        self::assertSame(0666 & ~umask(), $fileperms & 0777);
     }
 
     public function testConfigAggregatorSetsModeOnCache(): void
@@ -281,7 +286,9 @@ class ConfigAggregatorTest extends TestCase
                 ConfigAggregator::CACHE_FILEMODE => 0600,
             ],
         ], $this->cacheFile);
-        self::assertSame(0600, fileperms($this->cacheFile) & 0777);
+        $fileperms = fileperms($this->cacheFile);
+        self::assertNotFalse($fileperms);
+        self::assertSame(0600, $fileperms & 0777);
     }
 
     public function testConfigAggregatorSetsHandlesUnwritableCache(): void

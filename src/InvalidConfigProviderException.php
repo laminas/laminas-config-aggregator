@@ -8,6 +8,7 @@ use RuntimeException;
 
 use function sprintf;
 
+/** @final */
 class InvalidConfigProviderException extends RuntimeException
 {
     public static function fromDuplicateProvider(string $provider): self

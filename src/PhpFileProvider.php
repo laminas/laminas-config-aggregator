@@ -8,6 +8,8 @@ use Generator;
 
 /**
  * Provide a collection of PHP files returning config arrays.
+ *
+ * @final
  */
 class PhpFileProvider
 {
