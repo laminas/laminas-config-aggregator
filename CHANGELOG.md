@@ -2,27 +2,24 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 1.19.0 - TBD
+## 1.19.0 - 2025-10-14
 
-### Added
 
-- Nothing.
+-----
 
-### Changed
+### Release Notes for [1.19.0](https://github.com/laminas/laminas-config-aggregator/milestone/35)
 
-- Nothing.
+Feature release (minor)
 
-### Deprecated
+### 1.19.0
 
-- Nothing.
+- Total issues resolved: **0**
+- Total pull requests resolved: **1**
+- Total contributors: **1**
 
-### Removed
+#### Dependencies,Enhancement
 
-- Nothing.
-
-### Fixed
-
-- Nothing.
+ - [58: Drop support for PHP 8.1, add support for PHP 8.5](https://github.com/laminas/laminas-config-aggregator/pull/58) thanks to @gsteel
 
 ## 1.18.0 - 2025-02-21
 
