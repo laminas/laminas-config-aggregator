@@ -2,22 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://docs.laminas.dev/laminas-config-aggregator/</loc>
-         <lastmod>2025-02-21</lastmod>
+         <lastmod>2025-10-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-config-aggregator/caching/</loc>
-         <lastmod>2025-02-21</lastmod>
+         <lastmod>2025-10-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-config-aggregator/config-processors/</loc>
-         <lastmod>2025-02-21</lastmod>
+         <lastmod>2025-10-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-config-aggregator/config-providers/</loc>
-         <lastmod>2025-02-21</lastmod>
+         <lastmod>2025-10-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-config-aggregator/intro/</loc>
-         <lastmod>2025-02-21</lastmod>
+         <lastmod>2025-10-14</lastmod>
     </url>
 </urlset>
