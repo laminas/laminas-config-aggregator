@@ -10,6 +10,8 @@ use Laminas\Config\Factory as ConfigFactory;
  * Glob a set of any configuration files supported by Laminas\Config\Factory as
  * configuration providers.
  *
+ * @deprecated This class is deprecated and will be removed in version 3.0.0. without replacement.
+ *
  * @final
  */
 class LaminasConfigProvider
