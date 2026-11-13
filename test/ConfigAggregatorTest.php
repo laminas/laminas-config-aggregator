@@ -223,7 +223,7 @@ final class ConfigAggregatorTest extends TestCase
     {
         new ConfigAggregator([
             static fn(): array => [
-                'toUpper'                      => static fn($input): string => strtoupper($input),
+                'toUpper'                      => static fn(string $input): string => strtoupper($input),
                 ConfigAggregator::ENABLE_CACHE => true,
             ],
         ], $this->cacheFile);
@@ -239,7 +239,7 @@ final class ConfigAggregatorTest extends TestCase
     public function testConfigAggregatorCanCacheConfigWithClosuresWithUse(): void
     {
         $prefix          = 'prefix';
-        $functionWithUse = static fn($input): string => $prefix . $input;
+        $functionWithUse = static fn(string $input): string => $prefix . $input;
         new ConfigAggregator([
             static fn(): array => [
                 'addPrefix'                    => $functionWithUse,
